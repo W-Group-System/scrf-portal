@@ -1,71 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100">
-            <form class="login100-form validate-form" action="{{url('login')}}" method="POST" onsubmit="show()">
-                @csrf
-
-                <span class="login100-form-title p-b-43">
-                    {{env('APP_NAME', 'Laravel')}}
-                </span>
-                
-                
-                <div class="wrap-input100 validate-input" >
-                    <input class="input100" type="text" name="email" required>
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Email</span>
-                </div>
-                
-                
-                <div class="wrap-input100 validate-input">
-                    <input class="input100" type="password" name="password" required>
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Password</span>
-                </div>
-
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                    <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" checked>
-                        <label class="label-checkbox100" for="ckb1" >
-                            Remember me
-                        </label>
+<div class="page-header min-vh-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+                <div class="card card-plain">
+                    <div class="card-header pb-0 text-start">
+                        <h4 class="font-weight-bolder">Sign In</h4>
+                        <p class="mb-0">Enter your email and password to sign in</p>
                     </div>
+                    <div class="card-body">
+                        @include('components.error')
 
-                    <div>
-                        <a href="#" class="txt1">
-                            Forgot Password?
-                        </a>
+                        <form role="form" method="POST" action="{{url('login')}}" onsubmit="show()">
+                            @csrf 
+                            <div class="mb-3">
+                                <input type="email" class="form-control form-control-lg" name="email" placeholder="Email"
+                                    aria-label="Email" value="{{old('email')}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" name="password" class="form-control form-control-lg"
+                                    placeholder="Password" aria-label="Password">
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit"
+                                    class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                            </div>
+                        </form>
                     </div>
+                    
+
+                    {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                        <p class="mb-4 text-sm mx-auto">
+                            Don't have an account?
+                            <a href="javascript:;" class="text-primary text-gradient font-weight-bold">Sign
+                                up</a>
+                        </p>
+                    </div> --}}
                 </div>
-
-                @include('components.error')
-
-                <div class="container-login100-form-btn">
-                    <button class="login100-form-btn">
-                        Login
-                    </button>
+            </div>
+            <div
+                class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                    style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
+background-size: cover;">
+                    <span class="mask bg-gradient-primary opacity-6"></span>
+                    <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
+                        currency"</h4>
+                    <p class="text-white position-relative">The more effortless the writing looks, the more
+                        effort the writer actually put into the process.</p>
                 </div>
-                
-                {{-- <div class="text-center p-t-46 p-b-20">
-                    <span class="txt2">
-                        or sign up using
-                    </span>
-                </div>
-
-                <div class="login100-form-social flex-c-m">
-                    <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                        <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                    </a>
-
-                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                </div> --}}
-            </form>
-
-            <div class="login100-more" style="background-image: url('images/bg-01.jpg');">
             </div>
         </div>
     </div>

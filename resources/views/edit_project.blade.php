@@ -1,6 +1,6 @@
 @component('components.modal', [
     'modal_title' => 'Edit project', 
-    'modal_id' => 'edit', 
+    'modal_id' => 'edit'.$project->id, 
     'url' => url('update_project/'.$project->id), 
     'submit_btn_name' => 'Update'
     ])
@@ -14,7 +14,7 @@
         <select name="members[]" class="form-control chosen-select" multiple required>
             <option value="">Select users</option>
             @foreach ($users as $user)
-                <option value="{{$user->id}}">{{$user->name}}</option>
+                <option value="{{$user->id}}" @if(in_array($user->id, $project->projectMembers->pluck('user_id')->toArray())) selected @endif>{{$user->name}}</option>
             @endforeach
         </select>
     </div>
@@ -23,12 +23,12 @@
         <select name="department" class="form-control chosen-select" required>
             <option value="">Select departments</option>
             @foreach ($departments as $department)
-                <option value="{{$department->id}}">{{$department->name}}</option>
+                <option value="{{$department->id}}" @if($department->id == $project->department_id) selected @endif>{{$department->name}}</option>
             @endforeach
         </select>
     </div>
     <div class="form-group mb-1">
         Description 
-        <textarea name="description" class="form-control" cols="30" rows="10" required></textarea>
+        <textarea name="description" class="form-control" cols="30" rows="10" required>{{$project->description}}</textarea>
     </div>
 @endcomponent

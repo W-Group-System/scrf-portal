@@ -94,7 +94,25 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->all());
+        $projects = Project::findOrFail($id);
+        $projects->project_name = $request->project_name;
+        $projects->department_id = $request->department;
+        $projects->description = $request->description;
+        $projects->user_id = auth()->user()->id;
+        $projects->save();
+
+        $members = ProjectMember::where('project_id',$id)->delete();
+        foreach($request->members as $members)
+        {
+            $project_members = new ProjectMember;
+            $project_members->project_id = $projects->id;
+            $project_members->user_id = $members;
+            $project_members->save();
+        }
+
+        Alert::success('Successfully Updated')->persistent('Dismiss');
+        return back();
     }
 
     /**
