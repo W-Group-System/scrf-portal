@@ -84,9 +84,9 @@
                                             <button title="Edit" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal" data-bs-target="#edit{{$project->id}}">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
-                                            <button title="View" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#view{{$project->id}}">
+                                            <a href="{{url('show_project/'.$project->id)}}" title="View" class="btn btn-sm btn-info">
                                                 <i class="fa-solid fa-eye"></i>
-                                            </button>
+                                            </a>
                                         </td>
                                         <td>{{$project->project_name}}</td>
                                         <td>

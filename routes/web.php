@@ -38,5 +38,6 @@ Route::post('deactivate_department/{id}','DepartmentController@deactivate');
 Route::post('activate_department/{id}','DepartmentController@activate');
 
 Route::get('projects', 'ProjectController@index');
+Route::get('show_project/{id}', 'ProjectController@show');
 Route::post('store_project','ProjectController@store');
 Route::post('update_project/{id}','ProjectController@update');
