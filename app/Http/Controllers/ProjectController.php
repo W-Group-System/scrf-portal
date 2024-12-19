@@ -71,7 +71,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return view('view_project');
+        $project = Project::with('boardColumn')->findOrFail($id);
+
+        return view('view_project',compact('project'));
     }
 
     /**

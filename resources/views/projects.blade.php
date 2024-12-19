@@ -73,6 +73,7 @@
                                 <tr>
                                     <th>Action</th>
                                     <th>Project Name</th>
+                                    <th>Department</th>
                                     <th>Members</th>
                                     <th>Created By</th>
                                 </tr>
@@ -89,6 +90,7 @@
                                             </a>
                                         </td>
                                         <td>{{$project->project_name}}</td>
+                                        <td>{{$project->department->name}}</td>
                                         <td>
                                             @foreach ($project->projectMembers as $members)
                                                 <small>{{$members->user->name}}</small> <br>

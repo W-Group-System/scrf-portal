@@ -14,4 +14,12 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function boardColumn()
+    {
+        return $this->hasMany(BoardColumn::class);
+    }
 }
