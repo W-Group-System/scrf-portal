@@ -137,6 +137,14 @@
                             </li> --}}
                         @endif
 
+                        @if(auth()->user()->role == 'User')
+                            <li class="side-nav-item">
+                                <a href="{{url('system-change-request')}}" class="side-nav-link">
+                                    <i class="uil-grid"></i>
+                                    <span> System Change Request </span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
 
                     <!-- End Sidebar -->

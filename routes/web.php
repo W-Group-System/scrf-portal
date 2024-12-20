@@ -58,3 +58,8 @@ Route::get('show-project-task/{id}','ProjectTaskController@show');
 
 // Comments
 Route::post('comment', 'CommentController@store');
+
+// System Change Request
+Route::get('system-change-request', 'SystemChangeRequestController@index');
+Route::post('store-system-change-request','SystemChangeRequestController@store');
+Route::post('update-system-change-request/{id}','SystemChangeRequestController@update');

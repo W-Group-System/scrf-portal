@@ -22,4 +22,8 @@ class ProjectTask extends Model
     {
         return $this->hasMany(ProjectAttachment::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'reporter');
+    }
 }

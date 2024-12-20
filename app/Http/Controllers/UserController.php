@@ -127,7 +127,9 @@ class UserController extends Controller
         return [
             'Adminstrator' => 'Administrator',
             'IT Personnel' => 'IT Personnel',
-            'User' => 'User'
+            'User' => 'User',
+            'Department Head' => 'Department Head',
+            'IT Department Head' => 'IT Department Head'
         ];
     }
 
