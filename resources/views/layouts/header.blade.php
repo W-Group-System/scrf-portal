@@ -624,6 +624,10 @@
         <script src="{{asset('assets/js/vendor/dataTables.select.min.js')}}"></script>
         <script src="{{asset('fontawesome/js/all.min.js')}}"></script>
         <script src="{{asset('js/chosen.jquery.min.js')}}"></script>
+        <!-- plugin js -->
+        <script src="{{asset('assets/js/vendor/dropzone.min.js')}}"></script>
+        <!-- init js -->
+        <script src="{{asset('assets/js/ui/component.fileupload.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- demo app -->
         {{-- <script src="assets/js/pages/demo.dashboard.js"></script> --}}

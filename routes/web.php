@@ -50,3 +50,11 @@ Route::post('update_project/{id}','ProjectController@update');
 Route::post('add-column', 'BoardController@store');
 Route::post('update-column/{id}', 'BoardController@update');
 Route::post('delete-column/{id}','BoardController@destroy');
+
+// Task
+Route::post('store-project-task', 'ProjectTaskController@store');
+Route::post('update-project-task/{id}','ProjectTaskController@update');
+Route::get('show-project-task/{id}','ProjectTaskController@show');
+
+// Comments
+Route::post('comment', 'CommentController@store');
