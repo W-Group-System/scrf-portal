@@ -27,9 +27,9 @@
             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new">
                 Add Board Column
             </button>
-            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#newTask">
+            {{-- <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#newTask">
                 Add Task
-            </button>
+            </button> --}}
         </div>
         <div class="board">
             {{-- <div class="tasks" data-plugin="dragula"
@@ -91,9 +91,9 @@
                     <!-- Task Item End -->
 
                 </div> <!-- end company-list-1-->
-            </div> --}}
+            </div>
 
-            {{-- <div class="tasks">
+            <div class="tasks">
                 <h5 class="mt-0 task-header text-uppercase">In Progress (2)</h5>
 
                 <div id="task-list-two" class="task-list-items">
@@ -204,14 +204,15 @@
 
                 </div> <!-- end company-list-2-->
             </div> --}}
+
             @php
                 $containerIds = ($project->boardColumn)->pluck('id')->map(function ($id) {
                     return "task-list-$id";
                 })->toArray();
             @endphp
+            
             @foreach ($project->boardColumn as $key=>$board_column)
-                {{-- <div class="tasks" data-plugin="dragula" data-containers='["task-list-{{$board_column->id}}", "task-list-two", "task-list-three", "task-list-four"]'> --}}
-                <div class="tasks" data-plugin="dragula" data-containers='@json($containerIds)'>
+                <div class="tasks" data-plugin="dragula" @if($key == 0) data-containers='@json($containerIds)' @endif>
                     <h5 class="mt-0 task-header">{{$board_column->column}} (0)
                         <div class="dropdown float-end">
                             <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
@@ -236,7 +237,7 @@
 
                     <div id="task-list-{{$board_column->id}}" class="task-list-items">
                         <!-- Task Item -->
-                        @foreach ($board_column->projectTask as $task)
+                        @foreach ($board_column->projectTask->where('status','Approved') as $task)
                             <div class="card mb-0">
                                 <div class="card-body p-3">
                                     <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
@@ -251,39 +252,37 @@
 
                                     <h5 class="mt-2 mb-2">
                                         <a href="{{url('show-project-task/'.$task->id)}}"
-                                            class="text-body">{{$task->title}}</a>
+                                            class="text-body">{{$task->activity_task}}</a>
                                     </h5>
 
                                     <p class="mb-0">
-                                        {{-- <span class="pe-2 text-nowrap mb-2 d-inline-block">
-                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                            iOS
-                                        </span> --}}
                                         <span class="text-nowrap mb-2 d-inline-block">
                                             <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                            <b>0</b> Comments
+                                            <b>{{count($task->comments)}}</b> Comments
                                         </span>
                                     </p>
 
-                                    <div class="dropdown float-end">
-                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical font-18"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal"data-bs-target="#editTask{{$task->id}}"><i
-                                                    class="mdi mdi-pencil me-1"></i>Edit</a>
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item"><i
-                                                    class="mdi mdi-delete me-1"></i>Delete</a>
+                                    @if(auth()->user()->role == 'IT Department Head')
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical font-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal"data-bs-target="#editTask{{$task->id}}"><i
+                                                        class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item"><i
+                                                        class="mdi mdi-delete me-1"></i>Delete</a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     <p class="mb-0">
                                         <img src="{{asset('img/user.png')}}" alt="user-img"
                                             class="avatar-xs rounded-circle me-1">
-                                        <span class="align-middle">{{$task->assignedTo->name}}</span>
+                                        <span class="align-middle">{{optional($task->assignedTo)->name}}</span>
                                     </p>
                                 </div> <!-- end card-body -->
                             </div>
@@ -293,8 +292,6 @@
 
                     </div> <!-- end company-list-1-->
                 </div>
-
-                @include('edit_board_column')   
             @endforeach
 
         </div> <!-- end .board-->
@@ -305,6 +302,8 @@
 @include('new_task')
 
 @foreach ($project->boardColumn as $board_column)
+    @include('edit_board_column')   
+
     @foreach ($board_column->projectTask as $task)
         @include('edit_task')    
     @endforeach

@@ -32,10 +32,12 @@
         <div class="col-lg-12">
             <div class="card border border-1 border-primary">
                 <div class="card-header bg-primary">
-                    <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
-                        <i class="uil-plus"></i>
-                        New
-                    </button>
+                    <p class="m-0 text-white">System Change Request
+                        <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
+                            <i class="uil-plus"></i>
+                            New
+                        </button>
+                    </p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -59,6 +61,7 @@
                                 @foreach ($project_tasks as $project_task)
                                     <tr>
                                         <td>
+                                            @if($project_task->status == 'Pending')
                                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{$project_task->id}}">
                                                 <i class="fa fa-pen-to-square text-white"></i>
                                             </button>
@@ -66,6 +69,7 @@
                                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
                                                 <i class="fa fa-ban text-white"></i>
                                             </button>
+                                            @endif
 
                                             <a href="" class="btn btn-sm btn-info" target="_blank">
                                                 <i class="fa fa-print text-white"></i>
@@ -85,6 +89,8 @@
                                                 <span class="badge bg-warning">
                                             @elseif($project_task->status == 'Approved')
                                                 <span class="badge bg-success">
+                                            @elseif($project_task->status == 'Rejected' || $project_task->status == 'Cancelled')
+                                                <span class="badge bg-danger">
                                             @endif
                                                 {{$project_task->status}}
                                             </span>

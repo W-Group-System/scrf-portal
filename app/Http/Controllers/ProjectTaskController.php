@@ -103,20 +103,20 @@ class ProjectTaskController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all(),$id);
-        $project_task = ProjectTask::findOrFail($id);
+        // $project_task = ProjectTask::findOrFail($id);
         // $project_task->project_id = $request->project_id;
         // $project_task->board_column_id = 1;
-        $project_task->title = $request->title;
-        $project_task->priority = $request->priority;
-        $project_task->description = $request->description;
-        $project_task->assigned_to = $request->assigned_to;
-        $project_task->due_date = $request->due_date;
+        // $project_task->title = $request->title;
+        // $project_task->priority = $request->priority;
+        // $project_task->description = $request->description;
+        // $project_task->assigned_to = $request->assigned_to;
+        // $project_task->due_date = $request->due_date;
         // $project_task->reporter = auth()->user()->id;
-        $project_task->save();
+        // $project_task->save();
         
-        if ($request->hasFile('file'))
+        if ($request->hasFile('scrf_files'))
         {
-            $files = $request->file('file');
+            $files = $request->file('scrf_files');
             foreach($files as $file)
             {
                 $name = time().'-'.$file->getClientOriginalName();
@@ -125,7 +125,7 @@ class ProjectTaskController extends Controller
                 $file_name = '/project_attachments/'.$name;
 
                 $project_attachment = new ProjectAttachment;
-                $project_attachment->project_task_id =  $project_task->id;
+                $project_attachment->project_task_id =  $id;
                 $project_attachment->attachment = $file_name;
                 $project_attachment->file_name = $name;
                 $project_attachment->size = $size;

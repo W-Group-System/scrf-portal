@@ -21,7 +21,10 @@ class SystemChangeRequestController extends Controller
             })
             ->pluck('project_name','id');
 
-        $project_tasks = ProjectTask::get();
+        $project_tasks = ProjectTask::whereHas('project', function($q) {
+                $q->where('department_id', auth()->user()->department_id);
+            })
+            ->get();
         
         return view('system_change_request', compact('projects', 'project_tasks'));
     }
@@ -46,6 +49,7 @@ class SystemChangeRequestController extends Controller
     {
         // dd($request->all());
         $project_task = new ProjectTask();
+        $project_task->boarder_column_id = 1;
         $project_task->project_id = $request->project;
         $project_task->type_of_request = $request->type_of_request;
         $project_task->date_needed = $request->date_needed;

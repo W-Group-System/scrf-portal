@@ -72,7 +72,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::with('boardColumn')->findOrFail($id);
-        $users = User::where('role','IT Personnel')->pluck('name','id');
+        $users = User::where('role','IT Personnel')->where('status','Active')->pluck('name','id');
 
         return view('view_project',compact('project','users'));
     }

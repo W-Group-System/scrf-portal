@@ -69,7 +69,7 @@
                             <img src="{{asset('img/user.png')}}" alt="Arya S" class="rounded-circle me-2" height="24">
                             <div>
                                 <h5 class="mt-1 font-14">
-                                    {{$project_task->assignedTo->name}}
+                                    {{optional($project_task->assignedTo)->name}}
                                 </h5>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                             <i class='uil uil-schedule font-18 text-success me-1'></i>
                             <div>
                                 <h5 class="mt-1 font-14">
-                                    {{date('M. d Y', strtotime($project_task->due_date))}}
+                                    {{date('M. d Y', strtotime($project_task->date_needed))}}
                                 </h5>
                             </div>
                         </div>
@@ -106,10 +106,16 @@
                 </div> <!-- end row -->
 
 
-                <h5 class="mt-3">Overview:</h5>
+                <h5 class="mt-3">Activity Task:</h5>
 
                 <p class="text-muted mb-4">
-                    {{$project_task->description}}
+                    {{$project_task->activity_task}}
+                </p>
+
+                <h5 class="mt-3">Reason for change:</h5>
+
+                <p class="text-muted mb-4">
+                    {{$project_task->reason_for_changes}}
                 </p>
 
                 {{-- <!-- start sub tasks/checklists -->

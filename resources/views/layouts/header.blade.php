@@ -110,7 +110,7 @@
                             </li>
                         @endif
 
-                        @if(auth()->user()->role == 'IT Personnel')
+                        @if(auth()->user()->role == 'IT Personnel' || auth()->user()->role == 'IT Department Head')
                             <li class="side-nav-item">
                                 <a href="{{url('projects')}}" class="side-nav-link">
                                     <i class="uil-grid"></i>
@@ -137,13 +137,21 @@
                             </li> --}}
                         @endif
 
-                        @if(auth()->user()->role == 'User')
+                        @if(auth()->user()->role == 'User' || auth()->user()->role == 'Department Head' || auth()->user()->role == 'IT Department Head')
                             <li class="side-nav-item">
                                 <a href="{{url('system-change-request')}}" class="side-nav-link">
                                     <i class="uil-grid"></i>
                                     <span> System Change Request </span>
                                 </a>
                             </li>
+                            @if(auth()->user()->role == 'IT Department Head' || auth()->user()->role == 'Department Head')
+                                <li class="side-nav-item">
+                                    <a href="{{url('for-approval')}}" class="side-nav-link">
+                                        <i class="uil-grid"></i>
+                                        <span> For Approval </span>
+                                    </a>
+                                </li>
+                            @endif
                         @endif
                     </ul>
 
