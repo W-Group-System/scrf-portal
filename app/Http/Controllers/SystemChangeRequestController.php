@@ -49,7 +49,7 @@ class SystemChangeRequestController extends Controller
     {
         // dd($request->all());
         $project_task = new ProjectTask();
-        $project_task->boarder_column_id = 1;
+        $project_task->priority = $request->priority;
         $project_task->project_id = $request->project;
         $project_task->type_of_request = $request->type_of_request;
         $project_task->date_needed = $request->date_needed;
@@ -58,6 +58,7 @@ class SystemChangeRequestController extends Controller
         $project_task->goal = $request->goals;
         $project_task->reporter = auth()->user()->id;
         $project_task->status = 'Pending';
+        $project_task->progress = 'Todo';
         $project_task->save();
 
         Alert::success('Successfully Saved')->persistent('Dismiss');
@@ -99,6 +100,7 @@ class SystemChangeRequestController extends Controller
         $project_task = ProjectTask::findOrFail($id);
         // $project_task->project_id = $request->project;
         $project_task->type_of_request = $request->type_of_request;
+        $project_task->priority = $request->priority;
         $project_task->date_needed = $request->date_needed;
         $project_task->activity_task = $request->activity_task;
         $project_task->reason_for_changes = $request->reason_for_changes;

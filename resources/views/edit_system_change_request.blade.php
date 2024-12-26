@@ -21,10 +21,15 @@
         Date Needed
         <input type="date" name="date_needed" class="form-control form-control-sm" value="{{$project_task->date_needed}}" required>
     </div>
-    {{-- <div class="form-group mb-1">
-        Date Accomplished
-        <input type="date" name="date_accomplished" class="form-control form-control-sm" required>
-    </div> --}}
+    <div class="form-group mb-1">
+        Priority
+        <select data-placeholder="Select priority" name="priority" class="form-control chosen-select">
+            <option value=""></option>
+            <option value="Low" @if($project_task->priority == "Low") selected @endif>Low</option>
+            <option value="Medium" @if($project_task->priority == "Medium") selected @endif>Medium</option>
+            <option value="High" @if($project_task->priority == "High") selected @endif>High</option>
+        </select>
+    </div>
     <div class="form-group mb-1">
         Activity Task
         <textarea name="activity_task" class="form-control form-control-sm" cols="30" rows="10">{{$project_task->activity_task}}</textarea>

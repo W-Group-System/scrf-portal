@@ -19,12 +19,17 @@
     </div>
     <div class="form-group mb-1">
         Date Needed
-        <input type="date" name="date_needed" class="form-control form-control-sm" required>
+        <input type="date" name="date_needed" class="form-control form-control-sm" min="{{date('Y-m-d')}}" required>
     </div>
-    {{-- <div class="form-group mb-1">
-        Date Accomplished
-        <input type="date" name="date_accomplished" class="form-control form-control-sm" required>
-    </div> --}}
+    <div class="form-group mb-1">
+        Priority
+        <select data-placeholder="Select priority" name="priority" class="form-control chosen-select">
+            <option value=""></option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+    </div>
     <div class="form-group mb-1">
         Activity Task
         <textarea name="activity_task" class="form-control form-control-sm" cols="30" rows="10"></textarea>

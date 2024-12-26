@@ -48,6 +48,7 @@
                                     <th>System Change No.</th>
                                     <th>Project</th>
                                     <th>Type of Request</th>
+                                    <th>Priority</th>
                                     <th>Date Needed</th>
                                     <th>Activity Task</th>
                                     <th>Reason for changes</th>
@@ -78,6 +79,7 @@
                                         <td>SCRF {{str_pad($project_task->id, '2', 0, STR_PAD_LEFT)}}</td>
                                         <td>{{$project_task->project->project_name}}</td>
                                         <td>{{$project_task->type_of_request}}</td>
+                                        <td>{{$project_task->priority}}</td>
                                         <td>{{date('M d Y', strtotime($project_task->date_needed))}}</td>
                                         <td>{!! nl2br(e($project_task->activity_task)) !!}</td>
                                         <td>{!! nl2br(e($project_task->reason_for_changes)) !!}</td>
