@@ -66,28 +66,30 @@
                                         <b>0</b> Comments
                                     </span>
                                 </p>
-
-                                @if(empty($project_task->assigned_to))
-                                <p class="mb-0">No assigned</p>
+                                
+                                @if(empty($task->assigned_to))
+                                    <p class="mb-0">No assigned</p>
                                 @else
-                                <p class="mb-0">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
-                                        class="avatar-xs rounded-circle me-1">
-                                    <span class="align-middle">Robert Carlile</span>
-                                </p>
+                                    <p class="mb-0">
+                                        <img src="{{asset('img/user.png')}}" alt="user-img"
+                                            class="avatar-xs rounded-circle me-1">
+                                        <span class="align-middle">{{$task->assignedTo->name}}</span>
+                                    </p>
                                 @endif
 
-                                <div class="dropdown float-end">
-                                    <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical font-18"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
-                                        {{-- <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                @if(auth()->user()->role == 'IT Department Head')
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                            {{-- <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach
@@ -130,14 +132,28 @@
                                     </span>
                                 </p>
 
-                                @if(empty($project_task->assigned_to))
+                                @if(empty($task->assigned_to))
                                 <p class="mb-0">No assigned</p>
                                 @else
                                 <p class="mb-0">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                    <img src="{{asset('img/user.png')}}" alt="user-img"
                                         class="avatar-xs rounded-circle me-1">
-                                    <span class="align-middle">Robert Carlile</span>
+                                    <span class="align-middle">{{$task->assignedTo->name}}</span>
                                 </p>
+                                @endif
+
+                                @if(auth()->user()->role == 'IT Department Head')
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                            {{-- <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                        </div>
+                                    </div>
                                 @endif
                             </div> <!-- end card-body -->
                         </div>
@@ -181,14 +197,28 @@
                                     </span>
                                 </p>
 
-                                @if(empty($project_task->assigned_to))
+                                @if(empty($task->assigned_to))
                                 <p class="mb-0">No assigned</p>
                                 @else
                                 <p class="mb-0">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                    <img src="{{asset('img/user.png')}}" alt="user-img"
                                         class="avatar-xs rounded-circle me-1">
-                                    <span class="align-middle">Robert Carlile</span>
+                                    <span class="align-middle">{{$task->assignedTo->name}}</span>
                                 </p>
+                                @endif
+
+                                @if(auth()->user()->role == 'IT Department Head')
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                            {{-- <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                        </div>
+                                    </div>
                                 @endif
                             </div> <!-- end card-body -->
                         </div>
@@ -232,14 +262,28 @@
                                     </span>
                                 </p>
 
-                                @if(empty($project_task->assigned_to))
+                                @if(empty($task->assigned_to))
                                 <p class="mb-0">No assigned</p>
                                 @else
                                 <p class="mb-0">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                    <img src="{{asset('img/user.png')}}" alt="user-img"
                                         class="avatar-xs rounded-circle me-1">
-                                    <span class="align-middle">Robert Carlile</span>
+                                    <span class="align-middle">{{$task->assignedTo->name}}</span>
                                 </p>
+                                @endif
+
+                                @if(auth()->user()->role == 'IT Department Head')
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                            {{-- <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                        </div>
+                                    </div>
                                 @endif
                             </div> <!-- end card-body -->
                         </div>
@@ -283,14 +327,28 @@
                                     </span>
                                 </p>
 
-                                @if(empty($project_task->assigned_to))
+                                @if(empty($task->assigned_to))
                                 <p class="mb-0">No assigned</p>
                                 @else
                                 <p class="mb-0">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                    <img src="{{asset('img/user.png')}}" alt="user-img"
                                         class="avatar-xs rounded-circle me-1">
-                                    <span class="align-middle">Robert Carlile</span>
+                                    <span class="align-middle">{{$task->assignedTo->name}}</span>
                                 </p>
+                                @endif
+
+                                @if(auth()->user()->role == 'IT Department Head')
+                                    <div class="dropdown float-end">
+                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                            {{-- <!-- item-->
+                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                        </div>
+                                    </div>
                                 @endif
                             </div> <!-- end card-body -->
                         </div>

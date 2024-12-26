@@ -8,7 +8,7 @@
     <select data-placeholder="Select IT Personnel" name="assigned_to" class="form-control form-control-sm chosen-select" required>
         <option value=""></option>
         @foreach ($users as $key=>$user)
-            <option value="{{$key}}">{{$user}}</option>
+            <option value="{{$key}}" @if($key == $task->assigned_to) selected @endif>{{$user}}</option>
         @endforeach
     </select>
 </div>

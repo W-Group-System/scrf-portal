@@ -73,10 +73,11 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::with('projectMembers')->findOrFail($id);
+        $users = User::whereIn('role',['IT Personnel', 'IT Department Head'])->where('status',null)->pluck('name','id');
+        
         if (in_array(auth()->user()->id, $project->projectMembers->pluck('user_id')->toArray()))
         {
             $project_task = ProjectTask::with('assignedTo')->get();
-            $users = User::where('role','IT Personnel')->where('status','Active')->pluck('name','id');
     
             return view('view_project',compact('project_task','users'));
         }
