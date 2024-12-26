@@ -55,6 +55,7 @@ Route::post('delete-column/{id}','BoardController@destroy');
 Route::post('store-project-task', 'ProjectTaskController@store');
 Route::post('update-project-task/{id}','ProjectTaskController@update');
 Route::get('show-project-task/{id}','ProjectTaskController@show');
+Route::post('update-task-progress/{id}','ProjectTaskController@updateProgress');
 
 // Comments
 Route::post('comment', 'CommentController@store');

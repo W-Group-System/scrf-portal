@@ -147,4 +147,30 @@ class ProjectTaskController extends Controller
     {
         //
     }
+
+    public function updateProgress(Request $request,$id)
+    {
+        // dd($request->all());
+        try 
+        {
+            $project_task = ProjectTask::findOrFail($id);
+
+            if ($project_task->assigned_to == auth()->user()->id)
+            {
+                $project_task->progress = $request->progress;
+                $project_task->save();
+                
+                return response()->json(['success' => 'Successfully Updated']);
+            }
+            else
+            {
+                return response()->json(['error' => 'Error', 'message' => 'You are not allowed to update this task']);
+            }
+            
+        } 
+        catch (\Exception $e) 
+        {
+            return response()->json(['error' => 'Error', 'message' => $e->getMessage()]);
+        }
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Department;
 use App\Project;
 use App\ProjectMember;
+use App\ProjectTask;
 use App\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -71,10 +72,19 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::with('boardColumn')->findOrFail($id);
-        $users = User::where('role','IT Personnel')->where('status','Active')->pluck('name','id');
-
-        return view('view_project',compact('project','users'));
+        $project = Project::with('projectMembers')->findOrFail($id);
+        if (in_array(auth()->user()->id, $project->projectMembers->pluck('user_id')->toArray()))
+        {
+            $project_task = ProjectTask::with('assignedTo')->get();
+            $users = User::where('role','IT Personnel')->where('status','Active')->pluck('name','id');
+    
+            return view('view_project',compact('project_task','users'));
+        }
+        else
+        {
+            Alert::error('You are not a member of this project')->persistent('Dismiss');
+            return back();
+        }
     }
 
     /**

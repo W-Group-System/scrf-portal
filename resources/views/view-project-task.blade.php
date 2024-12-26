@@ -66,12 +66,16 @@
                         <!-- assignee -->
                         <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase">Assigned To</p>
                         <div class="d-flex">
+                            @if(empty($project_task->assignedTo))
+                            <p class="mb-0">No assigned</p>
+                            @else
                             <img src="{{asset('img/user.png')}}" alt="Arya S" class="rounded-circle me-2" height="24">
                             <div>
                                 <h5 class="mt-1 font-14">
                                     {{optional($project_task->assignedTo)->name}}
                                 </h5>
                             </div>
+                            @endif
                         </div>
                         <!-- end assignee -->
                     </div> <!-- end col -->

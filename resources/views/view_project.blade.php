@@ -6,10 +6,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    @if(request()->is('show_project/'.$project->id))
+                    {{-- @if(request()->is('show_project/'.$project->id))
                         <li class="breadcrumb-item"><a href="{{url('projects')}}">Project</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Tasks</a></li>
-                    @endif
+                    @endif --}}
                     {{-- <li class="breadcrumb-item active">Task Detail</li> --}}
                 </ol>
             </div>
@@ -24,188 +24,283 @@
             <a href="{{url('projects')}}" class="btn btn-sm btn-danger">
                 Close
             </a>
-            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new">
+            {{-- <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#new">
                 Add Board Column
-            </button>
+            </button> --}}
             {{-- <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#newTask">
                 Add Task
             </button> --}}
         </div>
         <div class="board">
-            {{-- <div class="tasks" data-plugin="dragula"
-                data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
-                <h5 class="mt-0 task-header">TODO (3)</h5>
+            <div class="tasks" data-plugin="dragula"
+                data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four","task-list-five"]'>
+                <h5 class="mt-0 task-header">TODO ({{count($project_task->where('status','Approved')->where('progress','Todo'))}})</h5>
 
-                <div id="task-list-one" class="task-list-items">
+                <div id="task-list-one" class="task-list-items" data-progress="Todo">
 
+                    @foreach ($project_task->where('status','Approved')->where('progress','Todo') as $task)
                     <!-- Task Item -->
-                    <div class="card mb-0">
-                        <div class="card-body p-3">
-                            <small class="float-end text-muted">18 Jul 2018</small>
-                            <span class="badge bg-danger">High</span>
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+                                <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
+                                @if($task->priority == 'High')
+                                    <span class="badge bg-danger">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Medium')
+                                    <span class="badge bg-warning">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Low')
+                                    <span class="badge bg-success">{{$task->priority}}</span>
+                                @endif
 
-                            <h5 class="mt-2 mb-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
-                                    class="text-body">iOS App home page</a>
-                            </h5>
+                                <h5 class="mt-2 mb-2">
+                                    <a href="{{url('show-project-task/'.$task->id)}}"
+                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                </h5>
 
-                            <p class="mb-0">
-                                <span class="pe-2 text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                    iOS
-                                </span>
-                                <span class="text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                    <b>74</b> Comments
-                                </span>
-                            </p>
+                                <p class="mb-0">
+                                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                        {{$task->project->project_name}}
+                                    </span>
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <b>0</b> Comments
+                                    </span>
+                                </p>
 
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical font-18"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-pencil me-1"></i>Edit</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-delete me-1"></i>Delete</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-plus-circle-outline me-1"></i>Add People</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-exit-to-app me-1"></i>Leave</a>
+                                @if(empty($project_task->assigned_to))
+                                <p class="mb-0">No assigned</p>
+                                @else
+                                <p class="mb-0">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                        class="avatar-xs rounded-circle me-1">
+                                    <span class="align-middle">Robert Carlile</span>
+                                </p>
+                                @endif
+
+                                <div class="dropdown float-end">
+                                    <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-vertical font-18"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editTask{{$task->id}}"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                        {{-- <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
+                                    </div>
                                 </div>
-                            </div>
-
-                            <p class="mb-0">
-                                <img src="assets/images/users/avatar-2.jpg" alt="user-img"
-                                    class="avatar-xs rounded-circle me-1">
-                                <span class="align-middle">Robert Carlile</span>
-                            </p>
-                        </div> <!-- end card-body -->
-                    </div>
+                            </div> <!-- end card-body -->
+                        </div>
+                    @endforeach
                     <!-- Task Item End -->
 
                 </div> <!-- end company-list-1-->
             </div>
 
             <div class="tasks">
-                <h5 class="mt-0 task-header text-uppercase">In Progress (2)</h5>
+                <h5 class="mt-0 task-header text-uppercase">In Progress ({{count($project_task->where('status','Approved')->where('progress','In Progress'))}})</h5>
 
-                <div id="task-list-two" class="task-list-items">
+                <div id="task-list-two" class="task-list-items" data-progress="In Progress">
 
+                    @foreach ($project_task->where('status','Approved')->where('progress','In Progress') as $task)
                     <!-- Task Item -->
-                    <div class="card mb-0">
-                        <div class="card-body p-3">
-                            <small class="float-end text-muted">22 Jun 2018</small>
-                            <span class="badge bg-secondary text-light">Medium</span>
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+                                <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
+                                @if($task->priority == 'High')
+                                    <span class="badge bg-danger">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Medium')
+                                    <span class="badge bg-warning">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Low')
+                                    <span class="badge bg-success">{{$task->priority}}</span>
+                                @endif
 
-                            <h5 class="mt-2 mb-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
-                                    class="text-body">Write a release note</a>
-                            </h5>
+                                <h5 class="mt-2 mb-2">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                </h5>
 
-                            <p class="mb-0">
-                                <span class="pe-2 text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                    Hyper
-                                </span>
-                                <span class="text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                    <b>17</b> Comments
-                                </span>
-                            </p>
+                                <p class="mb-0">
+                                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                        {{$task->project->project_name}}
+                                    </span>
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <b>0</b> Comments
+                                    </span>
+                                </p>
 
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical font-18"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-pencil me-1"></i>Edit</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-delete me-1"></i>Delete</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-plus-circle-outline me-1"></i>Add People</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-exit-to-app me-1"></i>Leave</a>
-                                </div>
-                            </div>
-
-                            <p class="mb-0">
-                                <img src="assets/images/users/avatar-5.jpg" alt="user-img"
-                                    class="avatar-xs rounded-circle me-1">
-                                <span class="align-middle">Sean White</span>
-                            </p>
-                        </div> <!-- end card-body -->
-                    </div>
-                    <!-- Task Item End -->
-
-                    <!-- Task Item -->
-                    <div class="card mb-0">
-                        <div class="card-body p-3">
-                            <small class="float-end text-muted">19 Jun 2018</small>
-                            <span class="badge bg-success">Low</span>
-
-                            <h5 class="mt-2 mb-2">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
-                                    class="text-body">Enable analytics tracking</a>
-                            </h5>
-
-                            <p class="mb-0">
-                                <span class="pe-2 text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-briefcase-outline text-muted"></i>
-                                    CRM
-                                </span>
-                                <span class="text-nowrap mb-2 d-inline-block">
-                                    <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                    <b>48</b> Comments
-                                </span>
-                            </p>
-
-                            <div class="dropdown float-end">
-                                <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical font-18"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-pencil me-1"></i>Edit</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-delete me-1"></i>Delete</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-plus-circle-outline me-1"></i>Add People</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item"><i
-                                            class="mdi mdi-exit-to-app me-1"></i>Leave</a>
-                                </div>
-                            </div>
-
-                            <p class="mb-0">
-                                <img src="assets/images/users/avatar-6.jpg" alt="user-img"
-                                    class="avatar-xs rounded-circle me-1">
-                                <span class="align-middle">Louis Allen</span>
-                            </p>
-                        </div> <!-- end card-body -->
-                    </div>
+                                @if(empty($project_task->assigned_to))
+                                <p class="mb-0">No assigned</p>
+                                @else
+                                <p class="mb-0">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                        class="avatar-xs rounded-circle me-1">
+                                    <span class="align-middle">Robert Carlile</span>
+                                </p>
+                                @endif
+                            </div> <!-- end card-body -->
+                        </div>
+                    @endforeach
                     <!-- Task Item End -->
 
                 </div> <!-- end company-list-2-->
-            </div> --}}
+            </div>
 
-            @php
+            <div class="tasks">
+                <h5 class="mt-0 task-header text-uppercase">QA ({{count($project_task->where('status','Approved')->where('progress','QA'))}})</h5>
+
+                <div id="task-list-three" class="task-list-items" data-progress="QA">
+
+                    @foreach ($project_task->where('status','Approved')->where('progress','QA') as $task)
+                    <!-- Task Item -->
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+                                <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
+                                @if($task->priority == 'High')
+                                    <span class="badge bg-danger">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Medium')
+                                    <span class="badge bg-warning">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Low')
+                                    <span class="badge bg-success">{{$task->priority}}</span>
+                                @endif
+
+                                <h5 class="mt-2 mb-2">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                </h5>
+
+                                <p class="mb-0">
+                                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                        {{$task->project->project_name}}
+                                    </span>
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <b>0</b> Comments
+                                    </span>
+                                </p>
+
+                                @if(empty($project_task->assigned_to))
+                                <p class="mb-0">No assigned</p>
+                                @else
+                                <p class="mb-0">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                        class="avatar-xs rounded-circle me-1">
+                                    <span class="align-middle">Robert Carlile</span>
+                                </p>
+                                @endif
+                            </div> <!-- end card-body -->
+                        </div>
+                    @endforeach
+                    <!-- Task Item End -->
+
+                </div> <!-- end company-list-2-->
+            </div>
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header text-uppercase">Failed ({{count($project_task->where('status','Approved')->where('progress','Failed'))}})</h5>
+
+                <div id="task-list-four" class="task-list-items" data-progress="Failed">
+
+                    @foreach ($project_task->where('status','Approved')->where('progress','Failed') as $task)
+                    <!-- Task Item -->
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+                                <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
+                                @if($task->priority == 'High')
+                                    <span class="badge bg-danger">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Medium')
+                                    <span class="badge bg-warning">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Low')
+                                    <span class="badge bg-success">{{$task->priority}}</span>
+                                @endif
+
+                                <h5 class="mt-2 mb-2">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                </h5>
+
+                                <p class="mb-0">
+                                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                        {{$task->project->project_name}}
+                                    </span>
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <b>0</b> Comments
+                                    </span>
+                                </p>
+
+                                @if(empty($project_task->assigned_to))
+                                <p class="mb-0">No assigned</p>
+                                @else
+                                <p class="mb-0">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                        class="avatar-xs rounded-circle me-1">
+                                    <span class="align-middle">Robert Carlile</span>
+                                </p>
+                                @endif
+                            </div> <!-- end card-body -->
+                        </div>
+                    @endforeach
+                    <!-- Task Item End -->
+
+                </div> <!-- end company-list-2-->
+            </div>
+
+            <div class="tasks">
+                <h5 class="mt-0 task-header text-uppercase">Done ({{count($project_task->where('status','Approved')->where('progress','Done'))}})</h5>
+
+                <div id="task-list-five" class="task-list-items" data-progress="Done">
+
+                    @foreach ($project_task->where('status','Approved')->where('progress','Done') as $task)
+                    <!-- Task Item -->
+                        <div class="card mb-0">
+                            <div class="card-body p-3">
+                                <small class="float-end text-muted">{{date('d M Y', strtotime($task->created_at))}}</small>
+                                @if($task->priority == 'High')
+                                    <span class="badge bg-danger">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Medium')
+                                    <span class="badge bg-warning">{{$task->priority}}</span>
+                                @elseif($task->priority == 'Low')
+                                    <span class="badge bg-success">{{$task->priority}}</span>
+                                @endif
+
+                                <h5 class="mt-2 mb-2">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                </h5>
+
+                                <p class="mb-0">
+                                    <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                        {{$task->project->project_name}}
+                                    </span>
+                                    <span class="text-nowrap mb-2 d-inline-block">
+                                        <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                        <b>0</b> Comments
+                                    </span>
+                                </p>
+
+                                @if(empty($project_task->assigned_to))
+                                <p class="mb-0">No assigned</p>
+                                @else
+                                <p class="mb-0">
+                                    <img src="assets/images/users/avatar-2.jpg" alt="user-img"
+                                        class="avatar-xs rounded-circle me-1">
+                                    <span class="align-middle">Robert Carlile</span>
+                                </p>
+                                @endif
+                            </div> <!-- end card-body -->
+                        </div>
+                    @endforeach
+                    <!-- Task Item End -->
+
+                </div> <!-- end company-list-2-->
+            </div>
+
+            {{-- @php
                 $containerIds = ($project->boardColumn)->pluck('id')->map(function ($id) {
                     return "task-list-$id";
                 })->toArray();
@@ -292,27 +387,71 @@
 
                     </div> <!-- end company-list-1-->
                 </div>
-            @endforeach
+            @endforeach --}}
 
         </div> <!-- end .board-->
     </div> <!-- end col -->
 </div>
 
-@include('new_board_column')
-@include('new_task')
+{{-- @include('new_board_column')
+@include('new_task') --}}
 
-@foreach ($project->boardColumn as $board_column)
+{{-- @foreach ($project->boardColumn as $board_column)
     @include('edit_board_column')   
 
-    @foreach ($board_column->projectTask as $task)
-        @include('edit_task')    
-    @endforeach
+    @endforeach --}}
+@foreach ($project_task as $task)
+    @include('edit_task')    
 @endforeach
 
 @endsection
 
 @section('js')
 <script src="{{asset('assets/js/vendor/dragula.min.js')}}"></script>
-<script src="{{asset('assets/js/ui/component.dragula.js')}}"></script>
-<script src="{{asset('js/board.js')}}"></script>
+{{-- <script src="{{asset('assets/js/ui/component.dragula.js')}}"></script> --}}
+{{-- <script src="{{asset('js/board.js')}}"></script> --}}
+<script>
+
+$(document).ready(function() {
+    $('.chosen-select').chosen()
+
+    var drake = dragula([
+        document.getElementById('task-list-one'),
+        document.getElementById('task-list-two'),
+        document.getElementById('task-list-three'),
+        document.getElementById('task-list-four'),
+        document.getElementById('task-list-five')
+    ])
+    
+    drake.on('drop', function(el, target, source, sibling) {
+        let taskId = $(el).find('a').attr('data-id');
+        let newProgress = $(target).attr('data-progress'); 
+        
+        $.ajax({
+            url: "{{url('update-task-progress')}}/" + taskId,
+            type: 'POST',
+            data: {
+                _token: "{{csrf_token()}}",
+                progress: newProgress,
+                id: taskId
+            },
+            success: function(response) {
+                if (response.error)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.message
+                    }).then((result) => {
+                        if (result.isConfirmed)  
+                        {
+                            location.reload()
+                        }
+                    })
+                }
+            }
+        })
+    })
+})
+</script>
 @endsection
