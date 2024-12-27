@@ -129,7 +129,8 @@ class UserController extends Controller
             'IT Personnel' => 'IT Personnel',
             'User' => 'User',
             'Department Head' => 'Department Head',
-            'IT Department Head' => 'IT Department Head'
+            'IT Department Head' => 'IT Department Head',
+            'System Administrator' => 'System Administrator',
         ];
     }
 

@@ -64,6 +64,7 @@ Route::post('comment', 'CommentController@store');
 Route::get('system-change-request', 'SystemChangeRequestController@index');
 Route::post('store-system-change-request','SystemChangeRequestController@store');
 Route::post('update-system-change-request/{id}','SystemChangeRequestController@update');
+Route::get('print-system-change-request/{id}','SystemChangeRequestController@printScrf');
 
 // For Approval SCRF
 Route::get('for-approval', 'ForApprovalController@index');

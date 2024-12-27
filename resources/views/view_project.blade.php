@@ -53,7 +53,7 @@
 
                                 <h5 class="mt-2 mb-2">
                                     <a href="{{url('show-project-task/'.$task->id)}}"
-                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                        class="text-body" data-id="{{$task->id}}">{{$task->project_name}}</a>
                                 </h5>
 
                                 <p class="mb-0">
@@ -77,7 +77,7 @@
                                     </p>
                                 @endif
 
-                                @if(auth()->user()->role == 'IT Department Head')
+                                {{-- @if(auth()->user()->role == 'IT Department Head') --}}
                                     <div class="dropdown float-end">
                                         <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical font-18"></i>
@@ -89,7 +89,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach
@@ -117,7 +117,7 @@
                                 @endif
 
                                 <h5 class="mt-2 mb-2">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                    <a href="{{url('show-project-task/'.$task->id)}}"
                                         class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
                                 </h5>
 
@@ -142,7 +142,7 @@
                                 </p>
                                 @endif
 
-                                @if(auth()->user()->role == 'IT Department Head')
+                                {{-- @if(auth()->user()->role == 'IT Department Head') --}}
                                     <div class="dropdown float-end">
                                         <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical font-18"></i>
@@ -154,7 +154,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach
@@ -182,7 +182,7 @@
                                 @endif
 
                                 <h5 class="mt-2 mb-2">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                    <a href="{{url('show-project-task/'.$task->id)}}"
                                         class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
                                 </h5>
 
@@ -207,7 +207,7 @@
                                 </p>
                                 @endif
 
-                                @if(auth()->user()->role == 'IT Department Head')
+                                {{-- @if(auth()->user()->role == 'IT Department Head') --}}
                                     <div class="dropdown float-end">
                                         <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical font-18"></i>
@@ -219,7 +219,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach
@@ -247,7 +247,7 @@
                                 @endif
 
                                 <h5 class="mt-2 mb-2">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                    <a href="{{url('show-project-task/'.$task->id)}}"
                                         class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
                                 </h5>
 
@@ -272,7 +272,7 @@
                                 </p>
                                 @endif
 
-                                @if(auth()->user()->role == 'IT Department Head')
+                                {{-- @if(auth()->user()->role == 'IT Department Head') --}}
                                     <div class="dropdown float-end">
                                         <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical font-18"></i>
@@ -284,7 +284,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach
@@ -312,7 +312,7 @@
                                 @endif
 
                                 <h5 class="mt-2 mb-2">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal"
+                                    <a href="{{url('show-project-task/'.$task->id)}}"
                                         class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
                                 </h5>
 
@@ -337,7 +337,7 @@
                                 </p>
                                 @endif
 
-                                @if(auth()->user()->role == 'IT Department Head')
+                                {{-- @if(auth()->user()->role == 'IT Department Head') --}}
                                     <div class="dropdown float-end">
                                         <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical font-18"></i>
@@ -349,7 +349,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a> --}}
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                             </div> <!-- end card-body -->
                         </div>
                     @endforeach

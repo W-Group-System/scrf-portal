@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\ProjectTask;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SystemChangeRequestController extends Controller
@@ -54,6 +56,7 @@ class SystemChangeRequestController extends Controller
         $project_task->type_of_request = $request->type_of_request;
         $project_task->date_needed = $request->date_needed;
         $project_task->activity_task = $request->activity_task;
+        $project_task->project_name = $request->project_name;
         $project_task->reason_for_changes = $request->reason_for_changes;
         $project_task->goal = $request->goals;
         $project_task->reporter = auth()->user()->id;
@@ -104,6 +107,7 @@ class SystemChangeRequestController extends Controller
         $project_task->date_needed = $request->date_needed;
         $project_task->activity_task = $request->activity_task;
         $project_task->reason_for_changes = $request->reason_for_changes;
+        $project_task->project_name = $request->project_name;
         $project_task->goal = $request->goals;
         // $project_task->reporter = auth()->user()->id;
         // $project_task->status = 'Pending';
@@ -122,5 +126,20 @@ class SystemChangeRequestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function printScrf($id)
+    {
+        $project_task = ProjectTask::findOrFail($id);
+
+        $data_array = [];
+        $data_array['project_task'] = $project_task;
+        $data_array['it_head'] = User::where('role', 'IT Department Head')->where('status',null)->first();
+        $data_array['sys_admin'] = User::where('role', 'System Administrator')->where('status',null)->first();
+        
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('print_scrf', $data_array)->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
     }
 }

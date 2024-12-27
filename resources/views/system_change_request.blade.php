@@ -72,7 +72,7 @@
                                             </button>
                                             @endif
 
-                                            <a href="" class="btn btn-sm btn-info" target="_blank">
+                                            <a href="{{url('print-system-change-request/'.$project_task->id)}}" class="btn btn-sm btn-info" target="_blank">
                                                 <i class="fa fa-print text-white"></i>
                                             </a>
                                         </td>

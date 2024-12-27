@@ -9,6 +9,10 @@
         </select>
     </div>
     <div class="form-group mb-1">
+        Project name
+        <input type="text" name="project_name" class="form-control form-control-sm" required>
+    </div>
+    <div class="form-group mb-1">
         Type of Request
         <select data-placeholder="Select type of request" name="type_of_request" class="form-control chosen-select" required>
             <option value=""></option>

@@ -147,7 +147,7 @@
                             @if(auth()->user()->role == 'IT Department Head' || auth()->user()->role == 'Department Head')
                                 <li class="side-nav-item">
                                     <a href="{{url('for-approval')}}" class="side-nav-link">
-                                        <i class="uil-grid"></i>
+                                        <i class="uil-check"></i>
                                         <span> For Approval </span>
                                     </a>
                                 </li>
