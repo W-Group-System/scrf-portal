@@ -45,7 +45,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Action</th>
-                                    <th>System Change No.</th>
+                                    {{-- <th>System Change No.</th> --}}
                                     <th>Project</th>
                                     <th>Type of Request</th>
                                     <th>Priority</th>
@@ -76,7 +76,7 @@
                                                 <i class="fa fa-print text-white"></i>
                                             </a>
                                         </td>
-                                        <td>SCRF {{str_pad($project_task->id, '2', 0, STR_PAD_LEFT)}}</td>
+                                        {{-- <td>SCRF {{str_pad($project_task->id, '2', 0, STR_PAD_LEFT)}}</td> --}}
                                         <td>{{$project_task->project->project_name}}</td>
                                         <td>{{$project_task->type_of_request}}</td>
                                         <td>{{$project_task->priority}}</td>

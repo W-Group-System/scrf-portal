@@ -82,9 +82,11 @@
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td>
-                                            <button title="Edit" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal" data-bs-target="#edit{{$project->id}}">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
+                                            @if(auth()->user()->role == 'IT Department Head')
+                                                <button title="Edit" class="btn btn-sm btn-warning text-white" data-bs-toggle="modal" data-bs-target="#edit{{$project->id}}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            @endif
                                             <a href="{{url('show_project/'.$project->id)}}" title="View" class="btn btn-sm btn-info">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>

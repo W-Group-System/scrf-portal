@@ -263,6 +263,34 @@
                 </div>
                 <!-- end file preview template -->
 
+                <div class="card my-1 shadow-none border">
+                    <div class="p-2">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="avatar-sm">
+                                    <span class="avatar-title rounded">
+                                        PDF
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="col ps-0">
+                                <a href="{{url('print-system-change-request/'.$project_task->id)}}" class="text-muted fw-bold" target="_blank">System Change Request Form</a>
+                                {{-- @php
+                                    $size = $attachment->size;
+                                    $size_display = $size / 1048576;
+                                @endphp
+                                <p class="mb-0">{{number_format($size_display,2)}} MB</p> --}}
+                            </div>
+                            {{-- <div class="col-auto">
+                                <!-- Button -->
+                                <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
+                                    <i class="dripicons-download"></i>
+                                </a>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
 
                 @foreach ($project_task->attachments as $attachment)
                     <div class="card my-1 shadow-none border">

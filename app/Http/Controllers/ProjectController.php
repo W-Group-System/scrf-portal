@@ -77,7 +77,7 @@ class ProjectController extends Controller
         
         if (in_array(auth()->user()->id, $project->projectMembers->pluck('user_id')->toArray()))
         {
-            $project_task = ProjectTask::with('assignedTo')->get();
+            $project_task = ProjectTask::with('assignedTo')->where('project_id', $id)->get();
     
             return view('view_project',compact('project_task','users'));
         }
