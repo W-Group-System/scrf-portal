@@ -76,6 +76,7 @@
                                     <th>Company</th>
                                     <th>Department</th>
                                     <th>Role</th>
+                                    <th>Immediate Supervisor</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -113,6 +114,7 @@
                                         <td>{{$user->company->name}}</td>
                                         <td>{{$user->department->name}}</td>
                                         <td>{{$user->role}}</td>
+                                        <td>{{optional($user->immediateSup)->name}}</td>
                                         <td>
                                             @if($user->status == null)
                                             <div class="badge bg-success">Active</div>

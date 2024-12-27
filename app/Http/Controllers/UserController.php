@@ -104,7 +104,7 @@ class UserController extends Controller
         $user->company_id = $request->company;
         $user->department_id = $request->department;
         $user->role = $request->roles;
-        // $user->status = null;
+        $user->immediate_supervisor = $request->immediate_supervisor;
         $user->save();
 
         Alert::success('Successfully Updated')->persistent('Dismiss');

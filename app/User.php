@@ -45,4 +45,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
+    public function immediateSup()
+    {
+        return $this->belongsTo(User::class, 'immediate_supervisor');
+    }
 }

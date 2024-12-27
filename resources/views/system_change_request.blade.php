@@ -54,7 +54,7 @@
                                     <th>Reason for changes</th>
                                     <th>Goals</th>
                                     <th>Requestor</th>
-                                    <th>Immediate Head Requestor</th>
+                                    {{-- <th>Immediate Head Requestor</th> --}}
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -85,7 +85,7 @@
                                         <td>{!! nl2br(e($project_task->reason_for_changes)) !!}</td>
                                         <td>{!! nl2br(e($project_task->goal)) !!}</td>
                                         <td>{{$project_task->user->name}}</td>
-                                        <td>{{$project_task->project->department->head->name}}</td>
+                                        {{-- <td>{{$project_task->project->department->head->name}}</td> --}}
                                         <td>
                                             @if($project_task->status == 'Pending')
                                                 <span class="badge bg-warning">

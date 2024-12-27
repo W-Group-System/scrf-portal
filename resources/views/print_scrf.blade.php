@@ -338,7 +338,7 @@
                 </td>
                 <td class="p-1">
                     <p style="font-size: 9;">Reviewed By:</p>
-                    <p style="font-size: 9; border-bottom:1px solid black;" class="text-center mt-4">{{$project_task->user->name}}</p>
+                    <p style="font-size: 9; border-bottom:1px solid black;" class="text-center mt-4">{{optional($project_task->user->immediateSup)->name}}</p>
                     <p style="font-size: 9;" class="text-center font-weight-bold">Immediate Head of Requestor</p>
                     <p style="font-size: 7;" class="text-center">(Signature over Printed Name/ Date)</p>
                 </td>

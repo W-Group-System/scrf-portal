@@ -34,4 +34,13 @@
             @endforeach
         </select>
     </div>
+    <div class="form-group mb-1">
+        Role 
+        <select name="immediate_supervisor" class="form-control chosen-select" required>
+            <option value="">Select role</option>
+            @foreach ($users->where('role','User')->where('status',null) as $sup)
+                <option value="{{$sup->id}}" @if($user->immediate_supervisor == $sup->id) selected @endif>{{$sup->name}}</option>
+            @endforeach
+        </select>
+    </div>
 @endcomponent
