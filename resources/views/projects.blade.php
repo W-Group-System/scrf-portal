@@ -60,10 +60,12 @@
         <div class="col-lg-12">
             <div class="card border border-1 border-primary">
                 <div class="card-header bg-primary">
-                    <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
-                        <i class="uil-plus"></i>
-                        New
-                    </button>
+                    <p class="m-0 fw-bold text-white">Projects
+                        <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
+                            <i class="uil-plus"></i>
+                            New
+                        </button>
+                    </p>
                 </div>
                 <div class="card-body">
                     @include('components.error')

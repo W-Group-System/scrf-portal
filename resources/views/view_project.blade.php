@@ -63,7 +63,7 @@
                                     </span>
                                     <span class="text-nowrap mb-2 d-inline-block">
                                         <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                        <b>0</b> Comments
+                                        <b>{{count($task->comments)}}</b> Comments
                                     </span>
                                 </p>
                                 
@@ -118,7 +118,7 @@
 
                                 <h5 class="mt-2 mb-2">
                                     <a href="{{url('show-project-task/'.$task->id)}}"
-                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                        class="text-body" data-id="{{$task->id}}">{{$task->project_name}}</a>
                                 </h5>
 
                                 <p class="mb-0">
@@ -128,7 +128,7 @@
                                     </span>
                                     <span class="text-nowrap mb-2 d-inline-block">
                                         <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                        <b>0</b> Comments
+                                        <b>{{count($task->comments)}}</b> Comments
                                     </span>
                                 </p>
 
@@ -183,7 +183,7 @@
 
                                 <h5 class="mt-2 mb-2">
                                     <a href="{{url('show-project-task/'.$task->id)}}"
-                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                        class="text-body" data-id="{{$task->id}}">{{$task->project_name}}</a>
                                 </h5>
 
                                 <p class="mb-0">
@@ -193,7 +193,7 @@
                                     </span>
                                     <span class="text-nowrap mb-2 d-inline-block">
                                         <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                        <b>0</b> Comments
+                                        <b>{{count($task->comments)}}</b> Comments
                                     </span>
                                 </p>
 
@@ -248,7 +248,7 @@
 
                                 <h5 class="mt-2 mb-2">
                                     <a href="{{url('show-project-task/'.$task->id)}}"
-                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                        class="text-body" data-id="{{$task->id}}">{{$task->project_name}}</a>
                                 </h5>
 
                                 <p class="mb-0">
@@ -258,7 +258,7 @@
                                     </span>
                                     <span class="text-nowrap mb-2 d-inline-block">
                                         <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                        <b>0</b> Comments
+                                        <b>{{count($task->comments)}}</b> Comments
                                     </span>
                                 </p>
 
@@ -313,7 +313,7 @@
 
                                 <h5 class="mt-2 mb-2">
                                     <a href="{{url('show-project-task/'.$task->id)}}"
-                                        class="text-body" data-id="{{$task->id}}">{{$task->activity_task}}</a>
+                                        class="text-body" data-id="{{$task->id}}">{{$task->project_name}}</a>
                                 </h5>
 
                                 <p class="mb-0">
@@ -323,7 +323,7 @@
                                     </span>
                                     <span class="text-nowrap mb-2 d-inline-block">
                                         <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                        <b>0</b> Comments
+                                        <b>{{count($task->comments)}}</b> Comments
                                     </span>
                                 </p>
 
@@ -493,6 +493,9 @@ $(document).ready(function() {
                 progress: newProgress,
                 id: taskId
             },
+            beforeSend: function() {
+                show()
+            },
             success: function(response) {
                 if (response.error)
                 {
@@ -506,6 +509,10 @@ $(document).ready(function() {
                             location.reload()
                         }
                     })
+                }
+                else
+                {
+                    location.reload()
                 }
             }
         })

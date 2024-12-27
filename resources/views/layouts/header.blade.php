@@ -113,7 +113,7 @@
                         @if(auth()->user()->role == 'IT Personnel' || auth()->user()->role == 'IT Department Head')
                             <li class="side-nav-item">
                                 <a href="{{url('projects')}}" class="side-nav-link">
-                                    <i class="uil-grid"></i>
+                                    <i class="uil-briefcase"></i>
                                     <span> Projects </span>
                                 </a>
                             </li>
