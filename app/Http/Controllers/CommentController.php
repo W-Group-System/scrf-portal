@@ -105,6 +105,19 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        $comment_images = CommentImages::where('comment_id',$id)->get();
+        if($comment_images)
+        {
+            foreach($comment_images as $comment_image)
+            {
+                $comment_image->delete();
+            }
+        }
+
+        Alert::success('Successfully Deleted')->persistent('Dismiss');
+        return back();
     }
 }

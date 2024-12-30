@@ -210,10 +210,20 @@
                         
                         <br>
                         <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i class="mdi mdi-pencil"></i> Edit</a>
-                        <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i class="mdi mdi-delete"></i> Delete</a>
+                        <a href="{{url('delete-comment/'.$comment->id)}}" class="text-muted font-13 d-inline-block mt-2" onclick="deleteComment({{$comment->id}})">
+                            <i class="mdi mdi-delete"></i> 
+                            Delete
+                        </a>
+
+                        <form action="{{url('delete-comment/'.$comment->id)}}" method="POST" class="d-inline-block" id="deleteCommentForm{{$comment->id}}" onsubmit="show()">
+                            @csrf
+
+                        </form>
                         
                     </div>
                 </div>
+
+                @include('edit_comment')
                 @endforeach
 
                 {{-- <div class="text-center mt-2">
@@ -385,6 +395,24 @@
                 reader.readAsDataURL(file);
             });
         }
+    }
+
+    function deleteComment(id) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this comment?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#deleteCommentForm'+id).submit();
+            }
+        });
     }
 
     const lightbox = GLightbox({

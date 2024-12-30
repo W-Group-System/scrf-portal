@@ -59,6 +59,8 @@ Route::post('update-task-progress/{id}','ProjectTaskController@updateProgress');
 
 // Comments
 Route::post('comment', 'CommentController@store');
+Route::post('update-comment/{id}', 'CommentController@update');
+Route::post('delete-comment/{id}', 'CommentController@destroy');
 
 // System Change Request
 Route::get('system-change-request', 'SystemChangeRequestController@index');
