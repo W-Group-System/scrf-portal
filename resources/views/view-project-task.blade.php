@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/glightbox.min.css')}}">
+@endsection
+
 @section('content')
 <!-- start page title -->
 <div class="row">
@@ -189,8 +193,25 @@
                         <h5 class="mt-0">{{$comment->user->name}} <small class="text-muted float-end">{{$comment->created_at->diffForHumans()}}</small></h5>
                         {!! nl2br(e($comment->comment)) !!}
 
-                        {{-- <br> --}}
-                        {{-- <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i class="mdi mdi-reply"></i> Reply</a> --}}
+                        <br>
+                        @if($comment->commentImage->isNotEmpty())
+                            @foreach ($comment->commentImage as $key=>$image)
+                                <a href="{{url($image->file)}}" 
+                                    class="glightbox" 
+                                    data-type="image"
+                                    data-effect="fade"
+                                    data-width="900px"
+                                    data-height="auto"
+                                    >
+                                    <img src="{{url($image->file)}}" alt="" style="max-width: 100px; max-height: 100px;" >
+                                </a>
+                            @endforeach
+                        @endif
+                        
+                        <br>
+                        <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i class="mdi mdi-pencil"></i> Edit</a>
+                        <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i class="mdi mdi-delete"></i> Delete</a>
+                        
                     </div>
                 </div>
                 @endforeach
@@ -203,14 +224,19 @@
                     <form action="{{url('comment')}}" class="comment-area-box" onsubmit="show()" method="POST" enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="project_task_id" value="{{$project_task->id}}">
-                        <textarea rows="3" name="comment" class="form-control border-0 resize-none" placeholder="Your comment..."></textarea>
+                        <textarea rows="3" name="comment" class="form-control border-0 resize-none" placeholder="Your comment..." required></textarea>
                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">
                             <div>
-                                <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-upload'></i></a>
-                                <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-at'></i></a>
+                                <input type="file" id="imageUpload" name="image_comment[]" accept="image/*" style="display: none;" onchange="previewImage(event)" multiple>
+
+                                <a href="#" class="btn btn-sm px-1 btn-light" onclick="document.getElementById('imageUpload').click()"><i class='mdi mdi-upload'></i></a>
+                                {{-- <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-at'></i></a> --}}
                             </div>
                             <button type="submit" class="btn btn-sm btn-success"><i class='uil uil-message me-1'></i>Submit</button>
                         </div>
+
+                        <div id="previewContainer" class="mt-2" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+
                     </form>
                 </div> <!-- end .border-->
 
@@ -327,4 +353,42 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="{{asset('js/glightbox.min.js')}}"></script>
+<script>
+    function previewImage(event) {
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('imagePreview');
+        const files = event.target.files;
+        previewContainer.innerHTML = '';
+        
+        if (files.length > 0) {
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Image Preview';
+                    img.style.maxWidth = '100px';
+                    img.style.maxHeight = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.border = '1px solid #ddd';
+                    img.style.padding = '5px';
+                    img.style.borderRadius = '5px';
+
+                    previewContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+
+    const lightbox = GLightbox({
+        closeButton: true
+    });
+</script>
 @endsection

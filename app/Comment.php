@@ -10,4 +10,8 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function commentImage()
+    {
+        return $this->hasMany(CommentImages::class);
+    }
 }

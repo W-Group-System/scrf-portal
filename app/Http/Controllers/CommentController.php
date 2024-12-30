@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\CommentImages;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -36,12 +37,28 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd(date('Y-m-d H:i:s'));
         $comment = new Comment;
         $comment->project_task_id = $request->project_task_id;
         $comment->comment = $request->comment;
         $comment->user_id = auth()->user()->id;
         $comment->save();
+
+        if ($request->has('image_comment'))
+        {
+            $files = $request->file('image_comment');
+            foreach($files as $file)
+            {
+                $name = time().'-'.$file->getClientOriginalName();
+                $file->move(public_path('comment_attachments'),$name);
+                $file_name = '/comment_attachments/'.$name;
+    
+                $comment_attachment = new CommentImages;
+                $comment_attachment->comment_id = $comment->id;
+                $comment_attachment->file = $file_name;
+                $comment_attachment->save();
+            }
+        }
 
         Alert::success('Successfully Commented')->persistent('Dismiss');
         return back();
