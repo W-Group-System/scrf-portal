@@ -37,7 +37,6 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        dd(date('Y-m-d H:i:s'));
         $comment = new Comment;
         $comment->project_task_id = $request->project_task_id;
         $comment->comment = $request->comment;
