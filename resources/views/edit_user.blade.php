@@ -35,7 +35,7 @@
         </select>
     </div>
     <div class="form-group mb-1">
-        Role 
+        Immediate Supervisor 
         <select name="immediate_supervisor" class="form-control chosen-select" required>
             <option value="">Select role</option>
             @foreach ($users->where('role','User')->where('status',null) as $sup)

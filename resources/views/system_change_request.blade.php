@@ -26,6 +26,20 @@
                 </div> 
             </div>
         </div>
+        <div class="col-lg-3">
+            <div class="card border border-1 border-primary">
+                <div class="card-header bg-primary">
+                    <h5 class="text-white fw-normal m-0 text-truncate">Cancelled</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <h3>{{count($project_tasks->where('status','Cancelled'))}}</h3>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -67,14 +81,20 @@
                                                 <i class="fa fa-pen-to-square text-white"></i>
                                             </button>
 
-                                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i class="fa fa-ban text-white"></i>
-                                            </button>
+                                            <form method="POST" action="{{url('cancel-system-change-request/'.$project_task->id)}}" class="d-inline" id="cancelScrfForm{{$project_task->id}}" onsubmit="show()">
+                                                @csrf
+
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="cancelScrf({{$project_task->id}})">
+                                                    <i class="fa fa-ban text-white"></i>
+                                                </button>
+                                            </form>
                                             @endif
 
+                                            @if($project_task->status != 'Cancelled')
                                             <a href="{{url('print-system-change-request/'.$project_task->id)}}" class="btn btn-sm btn-info" target="_blank">
                                                 <i class="fa fa-print text-white"></i>
                                             </a>
+                                            @endif
                                         </td>
                                         {{-- <td>SCRF {{str_pad($project_task->id, '2', 0, STR_PAD_LEFT)}}</td> --}}
                                         <td>{{$project_task->project->project_name}}</td>
