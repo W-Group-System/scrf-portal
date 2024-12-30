@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ForApprovalNotification;
 use App\Project;
 use App\ProjectTask;
 use App\User;
@@ -49,7 +50,6 @@ class SystemChangeRequestController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $project_task = new ProjectTask();
         $project_task->priority = $request->priority;
         $project_task->project_id = $request->project;
@@ -63,6 +63,8 @@ class SystemChangeRequestController extends Controller
         $project_task->status = 'Pending';
         $project_task->progress = 'Todo';
         $project_task->save();
+
+        // event(new ForApprovalNotification($project_task));
 
         Alert::success('Successfully Saved')->persistent('Dismiss');
         return back();
@@ -141,5 +143,15 @@ class SystemChangeRequestController extends Controller
         $pdf->loadView('print_scrf', $data_array)->setPaper('a4', 'portrait');
 
         return $pdf->stream();
+    }
+
+    public function cancel($id)
+    {
+        $project_task = ProjectTask::findOrFail($id);
+        $project_task->status = 'Cancelled';
+        $project_task->save();
+
+        Alert::success('Successfully Cancelled')->persistent('Dismiss');
+        return back();
     }
 }

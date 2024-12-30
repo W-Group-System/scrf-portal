@@ -26,6 +26,8 @@
         <link href="{{asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" id="light-style">
         <link href="{{asset('assets/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="dark-style">
 
+        @yield('css')
+
     </head>
 
     <style>
@@ -214,7 +216,7 @@
                                 </div>
                             </li> --}}
 
-                            {{-- <li class="dropdown notification-list">
+                            <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                     <i class="dripicons-bell noti-icon"></i>
                                     <span class="noti-icon-badge"></span>
@@ -301,7 +303,7 @@
                                     </a>
 
                                 </div>
-                            </li> --}}
+                            </li>
 
                             {{-- <li class="dropdown notification-list d-none d-sm-inline-block">
                                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -645,6 +647,7 @@
         <!-- init js -->
         <script src="{{asset('assets/js/ui/component.fileupload.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
         <!-- demo app -->
         {{-- <script src="assets/js/pages/demo.dashboard.js"></script> --}}
         <!-- end demo js-->
@@ -656,6 +659,17 @@
                 event.preventDefault();
                 document.getElementById('logout-form').submit();
             }
+            
+            // Pusher.logToConsole = true;
+
+            // var pusher = new Pusher('dcf753cf9b76b4553165', {
+            //     cluster: 'eu'
+            // });
+
+            // var channel = pusher.subscribe('my-channel');
+            // channel.bind('my-event', function(data) {
+            //     alert(JSON.stringify(data));
+            // });
         </script>
         
         @yield('js')

@@ -54,6 +54,7 @@
                     </p>
                 </div>
                 <div class="card-body">
+                    {{now()}}
                     <div class="table-responsive">
                         <table class="tables table w-100 nowrap table-sm">
                             <thead class="table-light">
@@ -76,7 +77,7 @@
                                 @foreach ($project_tasks as $project_task)
                                     <tr>
                                         <td>
-                                            @if($project_task->status == 'Pending')
+                                            @if($project_task->status == 'Pending' && auth()->user()->id == $project_task->reporter)
                                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{$project_task->id}}">
                                                 <i class="fa fa-pen-to-square text-white"></i>
                                             </button>
