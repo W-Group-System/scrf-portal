@@ -23,7 +23,7 @@
     </div>
     <div class="form-group mb-1">
         Date Needed
-        <input type="date" name="date_needed" class="form-control form-control-sm" min="{{date('Y-m-d')}}" required>
+        <input type="date" name="date_needed" class="form-control form-control-sm" min="{{date('Y-m-d', strtotime("+1 day"))}}" required>
     </div>
     <div class="form-group mb-1">
         Priority

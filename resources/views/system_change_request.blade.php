@@ -54,7 +54,6 @@
                     </p>
                 </div>
                 <div class="card-body">
-                    {{now()}}
                     <div class="table-responsive">
                         <table class="tables table w-100 nowrap table-sm">
                             <thead class="table-light">
