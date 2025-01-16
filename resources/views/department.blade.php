@@ -13,54 +13,56 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Departments</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($departments)}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
+                    <div class="float-end">
+                        <i class="mdi mdi-folder-outline widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Departments</h5>
+                    <h3 class="mt-3 mb-3">{{count($departments)}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
         </div>
+
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Active Departments</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($departments->where('status','Active'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
+                    <div class="float-end">
+                        <i class="mdi mdi-check widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Active Departments</h5>
+                    <h3 class="mt-3 mb-3">{{count($departments->where('status','Active'))}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
         </div>
+
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Inactive Departments</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($departments->where('status','Inactive'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
+                    <div class="float-end">
+                        <i class="mdi mdi-cancel widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Inactive Departments</h5>
+                    <h3 class="mt-3 mb-3">{{count($departments->where('status','Inactive'))}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#new">
                         <i class="uil-plus"></i>
                         New
                     </button>

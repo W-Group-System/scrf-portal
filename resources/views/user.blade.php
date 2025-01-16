@@ -13,54 +13,55 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">User</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($users)}}</h3>
-                        </div>
-                    </div> 
-                </div> 
+                    <div class="float-end">
+                        <i class="mdi mdi-account widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Users</h5>
+                    <h3 class="mt-3 mb-3">{{count($users)}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Active User</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($users->where('status',null))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
+                    <div class="float-end">
+                        <i class="mdi mdi-account-check widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Active Users</h5>
+                    <h3 class="mt-3 mb-3">{{count($users->where('status',null))}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+
         </div>
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Inactive User</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($users->where('status','Inactive'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
+                    <div class="float-end">
+                        <i class="mdi mdi-account-cancel widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Inactive Users</h5>
+                    <h3 class="mt-3 mb-3">{{count($users->where('status','Inactive'))}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#new">
                         <i class="uil-plus"></i>
                         New
                     </button>
@@ -78,7 +79,7 @@
                                     <th>Role</th>
                                     <th>Immediate Supervisor</th>
                                     <th>Status</th>
-                                </tr>
+                                </tr>   
                             </thead>
                             <tbody>
                                 @foreach ($users as $user)
