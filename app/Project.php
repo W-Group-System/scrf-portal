@@ -22,4 +22,8 @@ class Project extends Model
     {
         return $this->hasMany(BoardColumn::class);
     }
+    public function projectTask()
+    {
+        return $this->hasMany(ProjectTask::class);
+    }
 }

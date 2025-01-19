@@ -13,60 +13,32 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Projects</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($projects)}}</h3>
-                        </div>
-                    </div> 
-                </div> 
+                    <div class="float-end">
+                        <i class="mdi mdi-format-list-bulleted widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">Projects</h5>
+                    <h3 class="mt-3 mb-3">{{count($projects)}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
             </div>
         </div>
-        {{-- <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Active Companies</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($companies->where('status','Active'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Inactive Companies</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($companies->where('status','Inactive'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
-            </div>
-        </div> --}}
     </div>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <p class="m-0 fw-bold text-white">Projects
-                        <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
+            <div class="card">
+                @if(auth()->user()->role == 'IT Department Head')
+                    <div class="card-header">
+                        <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#new">
                             <i class="uil-plus"></i>
                             New
                         </button>
-                    </p>
-                </div>
+                    </div>
+                @endif
                 <div class="card-body">
                     @include('components.error')
                     <div class="table-responsive">
