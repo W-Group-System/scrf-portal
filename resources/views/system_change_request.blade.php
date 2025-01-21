@@ -13,45 +13,43 @@
 
     <div class="row">
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">System Change Request</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($project_tasks)}}</h3>
-                        </div>
-                    </div> 
-                </div> 
+                    <div class="float-end">
+                        <i class="mdi mdi-clipboard-edit-outline widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">SCRF</h5>
+                    <h3>{{count($project_tasks)}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <h5 class="text-white fw-normal m-0 text-truncate">Cancelled</h5>
-                </div>
+            <div class="card widget-flat">
                 <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h3>{{count($project_tasks->where('status','Cancelled'))}}</h3>
-                        </div>
-                    </div> 
-                </div> 
+                    <div class="float-end">
+                        <i class="mdi mdi-cancel widget-icon"></i>
+                    </div>
+                    <h5 class="text-muted fw-normal mt-0">SCRF Cancelled</h5>
+                    <h3>{{count($project_tasks->where('status','Cancelled'))}}</h3>
+                    <p class="mb-0 text-muted">
+                        <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                    </p>
+                </div> <!-- end card-body-->
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-lg-12">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary">
-                    <p class="m-0 text-white">System Change Request
-                        <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
-                            <i class="uil-plus"></i>
-                            New
-                        </button>
-                    </p>
+            <div class="card">
+                <div class="card-header">
+                    <button type="submit" class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#new">
+                        <i class="uil-plus"></i>
+                        New
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

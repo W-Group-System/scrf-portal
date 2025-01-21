@@ -19,7 +19,7 @@
                         <i class="mdi mdi-format-list-bulleted widget-icon"></i>
                     </div>
                     <h5 class="text-muted fw-normal mt-0">Projects</h5>
-                    <h3 class="mt-3 mb-3">{{count($projects)}}</h3>
+                    <h3>{{count($projects)}}</h3>
                     <p class="mb-0 text-muted">
                         <span class="text-nowrap">as of ({{date('F Y')}})</span>  
                     </p>
@@ -46,6 +46,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Action</th>
+                                    <th>Project Code</th>
                                     <th>Project Name</th>
                                     <th>Department</th>
                                     <th>Members</th>
@@ -65,6 +66,7 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
                                         </td>
+                                        <td>{{$project->project_code}}</td>
                                         <td>{{$project->project_name}}</td>
                                         <td>{{$project->department->name}}</td>
                                         <td>

@@ -6,6 +6,10 @@
     ])
 
     <div class="form-group mb-1">
+        Project Code
+        <input type="text" name="project_code" class="form-control form-control-sm" value="{{$project->project_code}}" required>
+    </div>
+    <div class="form-group mb-1">
         Project Name
         <input type="text" name="project_name" class="form-control form-control-sm" value="{{$project->project_name}}" required>
     </div>

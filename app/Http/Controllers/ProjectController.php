@@ -50,6 +50,7 @@ class ProjectController extends Controller
         $projects->department_id = $request->department;
         $projects->description = $request->description;
         $projects->user_id = auth()->user()->id;
+        $projects->project_code = $request->project_code;
         $projects->save();
 
         foreach($request->members as $members)
@@ -114,6 +115,7 @@ class ProjectController extends Controller
         $projects->department_id = $request->department;
         $projects->description = $request->description;
         $projects->user_id = auth()->user()->id;
+        $projects->project_code = $request->project_code;
         $projects->save();
 
         $members = ProjectMember::where('project_id',$id)->delete();

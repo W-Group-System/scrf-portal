@@ -39,7 +39,17 @@ class SystemChangeRequestController extends Controller
      */
     public function create()
     {
-        //
+        $projects = Project::whereHas('department', function($q) {
+            $q->where('department_id', auth()->user()->department_id);
+        })
+        ->pluck('project_name','id');
+
+        $project_tasks = ProjectTask::whereHas('project', function($q) {
+                $q->where('department_id', auth()->user()->department_id);
+            })
+            ->get();
+
+        return view('new_system_change_request', compact('projects','project_tasks'));
     }
 
     /**

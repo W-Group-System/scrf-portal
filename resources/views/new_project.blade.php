@@ -1,5 +1,9 @@
 @component('components.modal', ['modal_title' => 'Add new project', 'modal_id' => 'new', 'url' => url('store_project'), 'submit_btn_name' => 'Save'])
     <div class="form-group mb-1">
+        Project Code
+        <input type="text" name="project_code" class="form-control form-control-sm" required>
+    </div>
+    <div class="form-group mb-1">
         Project Name
         <input type="text" name="project_name" class="form-control form-control-sm" required>
     </div>

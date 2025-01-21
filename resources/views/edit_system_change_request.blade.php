@@ -46,4 +46,8 @@
         Goals
         <textarea name="goals" class="form-control form-control-sm" cols="30" rows="10">{{$project_task->goal}}</textarea>
     </div>
+    <div class="form-group mb-1">
+        Attach File
+        <textarea name="goals" class="form-control form-control-sm" cols="30" rows="10">{{$project_task->goal}}</textarea>
+    </div>
 @endcomponent

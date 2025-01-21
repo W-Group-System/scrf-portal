@@ -142,7 +142,7 @@
                         @if(auth()->user()->role == 'User' || auth()->user()->role == 'Department Head' || auth()->user()->role == 'IT Department Head')
                             <li class="side-nav-item">
                                 <a href="{{url('system-change-request')}}" class="side-nav-link">
-                                    <i class="uil-grid"></i>
+                                    <i class="mdi mdi-clipboard-edit-outline"></i>
                                     <span> System Change Request </span>
                                 </a>
                             </li>

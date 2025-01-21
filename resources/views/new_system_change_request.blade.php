@@ -1,4 +1,10 @@
-@component('components.modal', ['modal_title' => 'Add new system change request', 'modal_id' => 'new', 'url' => url('store-system-change-request'), 'submit_btn_name' => 'Save'])
+@component('components.modal', [
+    'modal_title' => 'Add new system change request', 
+    'modal_id' => 'new', 
+    'url' => url('store-system-change-request'), 
+    'submit_btn_name' => 'Save',
+    'hasEnctype' => true
+    ])
     <div class="form-group mb-1">
         Project
         <select data-placeholder="Select project" name="project" class="form-control chosen-select">
@@ -46,4 +52,8 @@
         Goals
         <textarea name="goals" class="form-control form-control-sm" cols="30" rows="10"></textarea>
     </div>
+    <div class="form-group mb-1">
+        Attach File
+        <input type="file" name="scrf_attachments" class="form-control form-control-sm" required multiple>
+    </div
 @endcomponent

@@ -19,7 +19,7 @@ $(document).ready(function () {
         stateSave: true,
         processing: false,
         serverSide: false,
-        order: false,
+        ordering: false,
     });
 
     $('.chosen-select').chosen({width:"100%"})
