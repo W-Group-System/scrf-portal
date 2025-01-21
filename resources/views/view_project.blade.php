@@ -493,9 +493,9 @@ $(document).ready(function() {
                 progress: newProgress,
                 id: taskId
             },
-            beforeSend: function() {
-                show()
-            },
+            // beforeSend: function() {
+            //     show()
+            // },
             success: function(response) {
                 if (response.error)
                 {

@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
-    @if(auth()->user()->role == 'IT Personnel')
+    @if(auth()->user()->role == 'IT Personnel' || auth()->user()->role == 'IT Department Head')
         <div class="row mt-3">
             <div class="col-lg-6">
                 <div class="row">
@@ -67,11 +67,11 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        List of delay SCRF
+                        <p class="fw-bold m-0">List of delay SCRF</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped tables">
+                            <table class="table tables table-sm">
                                 <thead>
                                     <tr>
                                         <th>SCRF No</th>
