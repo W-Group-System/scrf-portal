@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ForApprovalNotification;
 use App\Project;
 use App\ProjectTask;
+use App\ProjectTaskAttachment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -19,17 +20,14 @@ class SystemChangeRequestController extends Controller
      */
     public function index()
     {
-        $projects = Project::whereHas('department', function($q) {
-                $q->where('department_id', auth()->user()->department_id);
+        $projects = Project::with('projectTask.comments')
+            ->whereHas('projectMembers', function($q) {
+                $q->where('user_id', auth()->user()->id);
             })
-            ->pluck('project_name','id');
-
-        $project_tasks = ProjectTask::whereHas('project', function($q) {
-                $q->where('department_id', auth()->user()->department_id);
-            })
+            ->where('department_id', auth()->user()->department_id)
             ->get();
         
-        return view('system_change_request', compact('projects', 'project_tasks'));
+        return view('project_list', compact('projects'));
     }
 
     /**
@@ -60,9 +58,10 @@ class SystemChangeRequestController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $project_task = new ProjectTask();
         $project_task->priority = $request->priority;
-        $project_task->project_id = $request->project;
+        $project_task->project_id = $request->project_id;
         $project_task->type_of_request = $request->type_of_request;
         $project_task->date_needed = $request->date_needed;
         $project_task->activity_task = $request->activity_task;
@@ -74,6 +73,17 @@ class SystemChangeRequestController extends Controller
         $project_task->progress = 'Todo';
         $project_task->save();
 
+        $files = $request->file('scrf_attachments');
+        foreach ($files as $file) {
+            $filename = time().'-'.$file->getClientOriginalName();
+            $file->move(public_path('scrf_files'), $filename);
+            $filePath = '/scrf_files/'.$filename;
+
+            $project_task_attachments = new ProjectTaskAttachment();
+            $project_task_attachments->project_task_id = $project_task->id;
+            $project_task_attachments->file = $filePath;
+            $project_task_attachments->save();
+        }
         // event(new ForApprovalNotification($project_task));
 
         Alert::success('Successfully Saved')->persistent('Dismiss');
@@ -88,7 +98,11 @@ class SystemChangeRequestController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project_tasks = ProjectTask::with('project')->where('project_id', $id)->get();
+        // $project_id = $id;
+
+        return view('system_change_request', compact('project_tasks','project'));
     }
 
     /**
@@ -124,6 +138,11 @@ class SystemChangeRequestController extends Controller
         // $project_task->reporter = auth()->user()->id;
         // $project_task->status = 'Pending';
         $project_task->save();
+
+        if ($request->has('scrf_attachments'))
+        {
+
+        }
 
         Alert::success('Successfully Updated')->persistent('Dismiss');
         return back();

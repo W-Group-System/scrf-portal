@@ -3,9 +3,9 @@
     'modal_id' => 'new', 
     'url' => url('store-system-change-request'), 
     'submit_btn_name' => 'Save',
-    'hasEnctype' => true
+    'has_enctype' => true
     ])
-    <div class="form-group mb-1">
+    {{-- <div class="form-group mb-1">
         Project
         <select data-placeholder="Select project" name="project" class="form-control chosen-select">
             <option value=""></option>
@@ -13,7 +13,8 @@
                 <option value="{{$key}}">{{$project}}</option>
             @endforeach
         </select>
-    </div>
+    </div> --}}
+    <input type="hidden" name="project_id" value="{{$project->id}}">
     <div class="form-group mb-1">
         Project name
         <input type="text" name="project_name" class="form-control form-control-sm" required>
@@ -54,6 +55,6 @@
     </div>
     <div class="form-group mb-1">
         Attach File
-        <input type="file" name="scrf_attachments" class="form-control form-control-sm" required multiple>
+        <input type="file" name="scrf_attachments[]" class="form-control form-control-sm" required multiple>
     </div
 @endcomponent

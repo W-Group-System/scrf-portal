@@ -64,6 +64,7 @@ Route::post('delete-comment/{id}', 'CommentController@destroy');
 
 // System Change Request
 Route::get('system-change-request', 'SystemChangeRequestController@index');
+Route::get('show-system-change-request/{id}', 'SystemChangeRequestController@show');
 Route::get('create_scrf', 'SystemChangeRequestController@create');
 Route::post('store-system-change-request','SystemChangeRequestController@store');
 Route::post('update-system-change-request/{id}','SystemChangeRequestController@update');

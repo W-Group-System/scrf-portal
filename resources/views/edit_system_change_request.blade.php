@@ -1,5 +1,5 @@
 @component('components.modal', ['modal_title' => 'Edit change request', 'modal_id' => 'edit'.$project_task->id, 'url' => url('update-system-change-request/'.$project_task->id), 'submit_btn_name' => 'Update'])
-    <div class="form-group mb-1">
+    {{-- <div class="form-group mb-1">
         Project
         <select data-placeholder="Select project" name="project" class="form-control chosen-select">
             <option value=""></option>
@@ -7,7 +7,7 @@
                 <option value="{{$key}}" @if($project_task->project_id == $key) selected @endif>{{$project}}</option>
             @endforeach
         </select>
-    </div>
+    </div> --}}
     <div class="form-group mb-1">
         Project name
         <input type="text" name="project_name" class="form-control form-control-sm" value="{{$project_task->project_name}}" required>
@@ -48,6 +48,6 @@
     </div>
     <div class="form-group mb-1">
         Attach File
-        <textarea name="goals" class="form-control form-control-sm" cols="30" rows="10">{{$project_task->goal}}</textarea>
-    </div>
+        <input type="file" name="scrf_attachments" class="form-control form-control-sm" required multiple>
+    </div
 @endcomponent

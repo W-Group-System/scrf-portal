@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">System Change Request</h4>
+                <h4 class="page-title">{{$project->project_name}} - ({{$project->project_code}})</h4>
             </div>
         </div>
     </div>     
@@ -57,8 +57,8 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Action</th>
-                                    {{-- <th>System Change No.</th> --}}
-                                    <th>Project</th>
+                                    <th>System Change No.</th>
+                                    {{-- <th>Project</th> --}}
                                     <th>Type of Request</th>
                                     <th>Priority</th>
                                     <th>Date Needed</th>
@@ -71,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($project_tasks as $project_task)
+                                @foreach ($project_tasks as $key=>$project_task)
                                     <tr>
                                         <td>
                                             @if($project_task->status == 'Pending' && auth()->user()->id == $project_task->reporter)
@@ -94,8 +94,8 @@
                                             </a>
                                             @endif
                                         </td>
-                                        {{-- <td>SCRF {{str_pad($project_task->id, '2', 0, STR_PAD_LEFT)}}</td> --}}
-                                        <td>{{$project_task->project->project_name}}</td>
+                                        <td>{{$project_task->project->project_code}}-{{str_pad($key+1, '2', 0, STR_PAD_LEFT)}}</td>
+                                        {{-- <td>{{$project_task->project->project_name}}</td> --}}
                                         <td>{{$project_task->type_of_request}}</td>
                                         <td>{{$project_task->priority}}</td>
                                         <td>{{date('M d Y', strtotime($project_task->date_needed))}}</td>

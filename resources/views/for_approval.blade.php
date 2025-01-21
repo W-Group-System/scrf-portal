@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">System Change Request</h4>
+            <h4 class="page-title">For Approval</h4>
         </div>
     </div>
 </div>     
@@ -12,26 +12,26 @@
 
 <div class="row">
     <div class="col-lg-3">
-        <div class="card border border-1 border-primary">
-            <div class="card-header bg-primary">
-                <h5 class="text-white fw-normal m-0 text-truncate">System Change Request</h5>
-            </div>
+        <div class="card widget-flat">
             <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        {{-- <h3>{{count($project_tasks)}}</h3> --}}
-                    </div>
-                </div> 
-            </div> 
+                <div class="float-end">
+                    <i class="mdi mdi-progress-clock widget-icon"></i>
+                </div>
+                <h5 class="text-muted fw-normal mt-0">Pending</h5>
+                <h3 class="mt-3 mb-3">{{count([])}}</h3>
+                <p class="mb-0 text-muted">
+                    <span class="text-nowrap">as of ({{date('F Y')}})</span>  
+                </p>
+            </div> <!-- end card-body-->
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="card border border-1 border-primary">
-            <div class="card-header bg-primary">
-                <p class="m-0 text-white">For Approval</p>
+        <div class="card">
+            <div class="card-header">
+                <p class="m-0 fw-bold">For Approval</p>
                 {{-- <button class="btn btn-warning text-light" data-bs-toggle="modal" data-bs-target="#new">
                     <i class="uil-plus"></i>
                     New
