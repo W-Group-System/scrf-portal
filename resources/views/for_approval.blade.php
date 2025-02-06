@@ -47,9 +47,9 @@
                                 <th>Project</th>
                                 <th>Type of Request</th>
                                 <th>Date Needed</th>
-                                <th>Activity Task</th>
-                                <th>Reason for changes</th>
-                                <th>Goals</th>
+                                {{-- <th>Activity Task</th> --}}
+                                {{-- <th>Reason for changes</th> --}}
+                                {{-- <th>Goals</th> --}}
                                 <th>Requestor</th>
                                 <th>Immediate Head Requestor</th>
                             </tr>
@@ -58,6 +58,10 @@
                             @foreach ($project_tasks as $project_task)
                                 <tr>
                                     <td>
+                                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#view{{$project_task->id}}">
+                                            <i class="uil-eye"></i>
+                                        </button>
+
                                         <form method="POST" action="{{url('reject-scrf/'.$project_task->id)}}" class="d-inline-block" id="rejectForm{{$project_task->id}}" onsubmit="show()">
                                             @csrf
                                             <button type="button" class="btn btn-sm btn-danger" onclick="reject({{$project_task->id}})">
@@ -76,14 +80,15 @@
                                     <td>{{$project_task->project->project_name}}</td>
                                     <td>{{$project_task->type_of_request}}</td>
                                     <td>{{date('M d Y', strtotime($project_task->date_needed))}}</td>
-                                    <td>{!! nl2br(e($project_task->activity_task)) !!}</td>
-                                    <td>{!! nl2br(e($project_task->reason_for_changes)) !!}</td>
-                                    <td>{!! nl2br(e($project_task->goal)) !!}</td>
+                                    {{-- <td>{!! nl2br(e($project_task->activity_task)) !!}</td> --}}
+                                    {{-- <td>{!! nl2br(e($project_task->reason_for_changes)) !!}</td> --}}
+                                    {{-- <td>{!! nl2br(e($project_task->goal)) !!}</td> --}}
                                     <td>{{$project_task->user->name}}</td>
                                     <td>{{$project_task->project->department->head->name}}</td>
                                 </tr>
 
                                 {{-- @include('edit_system_change_request') --}}
+                                @include('view_scrf_details')
                             @endforeach
                         </tbody>
                     </table>

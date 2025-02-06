@@ -11,7 +11,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    @if(!isset($view))
                     <button type="submit" class="btn btn-primary">{{$submit_btn_name}}</button>
+                    @endif
                 </div>
             </form>
         </div>
