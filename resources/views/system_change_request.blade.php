@@ -93,6 +93,12 @@
                                                 <i class="fa fa-print text-white"></i>
                                             </a>
                                             @endif
+
+                                            @if($project_task->status == 'Approved')
+                                            <a href="{{url('show-project-task/'.$project_task->id)}}" class="btn btn-sm btn-success" target="_blank">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            @endif
                                         </td>
                                         <td>{{$project_task->project->project_code}}-{{str_pad($key+1, '2', 0, STR_PAD_LEFT)}}</td>
                                         {{-- <td>{{$project_task->project->project_name}}</td> --}}

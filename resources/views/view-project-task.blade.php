@@ -111,14 +111,28 @@
                         </div>
                         <!-- end due date -->
                     </div> <!-- end col -->
+
+                    <div class="col-4">
+                        <!-- start due date -->
+                        <h5 class="mt-3">Activity Task:</h5>
+
+                        <p class="text-muted mb-4">
+                            {{$project_task->activity_task}}
+                        </p>
+                        <!-- end due date -->
+                    </div> <!-- end col -->
+
+                    <div class="col-4">
+                        <!-- start due date -->
+                        <h5 class="mt-3">Progress:</h5>
+
+                        <p class="text-muted mb-4">
+                            {{$project_task->progress}}
+                        </p>
+                        <!-- end due date -->
+                    </div> <!-- end col -->
+
                 </div> <!-- end row -->
-
-
-                <h5 class="mt-3">Activity Task:</h5>
-
-                <p class="text-muted mb-4">
-                    {{$project_task->activity_task}}
-                </p>
 
                 <h5 class="mt-3">Reason for change:</h5>
 
@@ -235,7 +249,6 @@
                         @csrf 
                         <input type="hidden" name="project_task_id" value="{{$project_task->id}}">
 
-                        @if($project_task->assigned_to == auth()->user()->id)
                         <textarea rows="3" name="comment" class="form-control border-0 resize-none" placeholder="Your comment..." required></textarea>
                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">
                             <div>
@@ -247,7 +260,6 @@
                         </div>
 
                         <div id="previewContainer" class="mt-2" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
-                        @endif
                     </form>
                 </div> <!-- end .border-->
 
