@@ -54,22 +54,22 @@
                 <!-- LOGO -->
                 <a href="index.html" class="logo text-center logo-light">
                     <span class="logo-lg">
-                        <img src="assets/images/logo.png" alt="" height="16">
+                        <img src="{{ asset('img/m.png') }}" alt="" height="60">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo_sm.png" alt="" height="16">
+                        <img src="{{ asset('img/m.png') }}" alt="" height="45">
                     </span>
                 </a>
 
                 <!-- LOGO -->
-                <a href="index.html" class="logo text-center logo-dark">
+                {{-- <a href="index.html" class="logo text-center logo-dark">
                     <span class="logo-lg">
-                        <img src="assets/images/logo-dark.png" alt="" height="16">
+                        <img src="{{ asset('img/m.png') }}" alt="" height="16">
                     </span>
                     <span class="logo-sm">
-                        <img src="assets/images/logo_sm_dark.png" alt="" height="16">
+                        <img src="{{ asset('img/m.png') }}" alt="" height="16">
                     </span>
-                </a>
+                </a> --}}
     
                 <div class="h-100" id="leftside-menu-container" data-simplebar="">
 
