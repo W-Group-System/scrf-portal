@@ -122,7 +122,7 @@
                         <p class="mb-1">
                             <span class="pe-2 text-nowrap mb-2 d-inline-block">
                                 <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
-                                <b>{{count($project->projectTask)}}</b> System Change Request
+                                <b>{{count($project->projectTask->where('status', 'Approved'))}}</b> System Change Request
                             </span>
                             <span class="text-nowrap mb-2 d-inline-block">
                                 <i class="mdi mdi-comment-multiple-outline text-muted"></i>

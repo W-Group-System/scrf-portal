@@ -234,19 +234,20 @@
                     <form action="{{url('comment')}}" class="comment-area-box" onsubmit="show()" method="POST" enctype="multipart/form-data">
                         @csrf 
                         <input type="hidden" name="project_task_id" value="{{$project_task->id}}">
+
+                        @if($project_task->assigned_to == auth()->user()->id)
                         <textarea rows="3" name="comment" class="form-control border-0 resize-none" placeholder="Your comment..." required></textarea>
                         <div class="p-2 bg-light d-flex justify-content-between align-items-center">
                             <div>
                                 <input type="file" id="imageUpload" name="image_comment[]" accept="image/*" style="display: none;" onchange="previewImage(event)" multiple>
 
                                 <a href="#" class="btn btn-sm px-1 btn-light" onclick="document.getElementById('imageUpload').click()"><i class='mdi mdi-upload'></i></a>
-                                {{-- <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-at'></i></a> --}}
                             </div>
                             <button type="submit" class="btn btn-sm btn-success"><i class='uil uil-message me-1'></i>Submit</button>
                         </div>
 
                         <div id="previewContainer" class="mt-2" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
-
+                        @endif
                     </form>
                 </div> <!-- end .border-->
 
