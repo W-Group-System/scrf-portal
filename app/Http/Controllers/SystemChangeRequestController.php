@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Events\ForApprovalNotification;
 use App\Project;
 use App\ProjectTask;
 use App\ProjectTaskAttachment;
+use App\ScrfApproval;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -59,6 +61,8 @@ class SystemChangeRequestController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $dept_head = Department::with('head')->where('id', auth()->user()->department_id)->first();
+        
         $project_task = new ProjectTask();
         $project_task->priority = $request->priority;
         $project_task->project_id = $request->project_id;
@@ -70,21 +74,30 @@ class SystemChangeRequestController extends Controller
         $project_task->goal = $request->goals;
         $project_task->reporter = auth()->user()->id;
         $project_task->status = 'Pending';
-        $project_task->progress = 'Todo';
+        // $project_task->progress = 'Todo';
         $project_task->save();
 
-        $files = $request->file('scrf_attachments');
-        foreach ($files as $file) {
-            $filename = time().'-'.$file->getClientOriginalName();
-            $file->move(public_path('scrf_files'), $filename);
-            $filePath = '/scrf_files/'.$filename;
-
-            $project_task_attachments = new ProjectTaskAttachment();
-            $project_task_attachments->project_task_id = $project_task->id;
-            $project_task_attachments->file = $filePath;
-            $project_task_attachments->save();
+        if ($request->has('scrf_attachments'))
+        {
+            $files = $request->file('scrf_attachments');
+            foreach ($files as $file) {
+                $filename = time().'-'.$file->getClientOriginalName();
+                $file->move(public_path('scrf_files'), $filename);
+                $filePath = '/scrf_files/'.$filename;
+    
+                $project_task_attachments = new ProjectTaskAttachment();
+                $project_task_attachments->project_task_id = $project_task->id;
+                $project_task_attachments->file = $filePath;
+                $project_task_attachments->save();
+            }
         }
-        // event(new ForApprovalNotification($project_task));
+
+        $scrf_approval = new ScrfApproval;
+        $scrf_approval->user_id = $dept_head->user_id;
+        $scrf_approval->level = 1;
+        $scrf_approval->project_task_id = $project_task->id;
+        $scrf_approval->status = 'Pending';
+        $scrf_approval->save();
 
         Alert::success('Successfully Saved')->persistent('Dismiss');
         return back();
@@ -136,13 +149,27 @@ class SystemChangeRequestController extends Controller
         $project_task->project_name = $request->project_name;
         $project_task->goal = $request->goals;
         // $project_task->reporter = auth()->user()->id;
-        // $project_task->status = 'Pending';
+        $project_task->status = 'Pending';
         $project_task->save();
 
         if ($request->has('scrf_attachments'))
         {
-
+            $files = $request->file('scrf_attachments');
+            foreach ($files as $file) {
+                $filename = time().'-'.$file->getClientOriginalName();
+                $file->move(public_path('scrf_files'), $filename);
+                $filePath = '/scrf_files/'.$filename;
+    
+                $project_task_attachments = new ProjectTaskAttachment();
+                $project_task_attachments->project_task_id = $project_task->id;
+                $project_task_attachments->file = $filePath;
+                $project_task_attachments->save();
+            }
         }
+
+        $scrf_approval = ScrfApproval::where('project_task_id',$id)->first();
+        $scrf_approval->status = 'Pending';
+        $scrf_approval->save();
 
         Alert::success('Successfully Updated')->persistent('Dismiss');
         return back();

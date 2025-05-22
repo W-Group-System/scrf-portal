@@ -26,4 +26,8 @@ class ProjectTask extends Model
     {
         return $this->belongsTo(User::class,'reporter');
     }
+    public function project_task_attachment()
+    {
+        return $this->hasMany(ProjectTaskAttachment::class);
+    }
 }

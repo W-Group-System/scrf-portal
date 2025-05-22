@@ -50,12 +50,15 @@
             {!! nl2br(e($project_task->goal)) !!}
         </dd>
         <dt class="col-sm-3">
-            View Form :
+            View Attachments :
         </dt>
         <dd class="col-sm-9">
-            <a href="{{url('print-system-change-request/'.$project_task->id)}}" class="btn btn-sm btn-danger" target="_blank">
-                View SCRF
-            </a>
+            @foreach ($project_task->project_task_attachment as $attachment)
+                <a href="{{url($attachment->file)}}" class="btn btn-sm btn-danger mb-1" target="_blank">
+                    View Attachments
+                </a>
+                <br>
+            @endforeach
         </dd>
     </dl>
 @endcomponent

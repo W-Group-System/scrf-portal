@@ -1,6 +1,4 @@
 function approve(id) {
-    console.log(id, 'approve');
-
     Swal.fire({
         title: 'Approve',
         text: 'Are you sure you want to approve this request?',
@@ -17,11 +15,9 @@ function approve(id) {
 }
 
 function reject(id) {
-    console.log(id, 'reject');
-
     Swal.fire({
-        title: 'Reject',
-        text: 'Are you sure you want to reject this request?',
+        title: 'Returned',
+        text: 'Are you sure you want to returned this request?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes',

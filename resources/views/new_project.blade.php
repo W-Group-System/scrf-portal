@@ -21,7 +21,7 @@
         <select name="department" class="form-control chosen-select" required>
             <option value="">Select departments</option>
             @foreach ($departments as $department)
-                <option value="{{$department->id}}">{{$department->name}}</option>
+                <option value="{{$department->id}}">{{$department->code .' - '.$department->name}}</option>
             @endforeach
         </select>
     </div>

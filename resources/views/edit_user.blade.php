@@ -34,7 +34,7 @@
             @endforeach
         </select>
     </div>
-    <div class="form-group mb-1">
+    {{-- <div class="form-group mb-1">
         Immediate Supervisor 
         <select name="immediate_supervisor" class="form-control chosen-select" required>
             <option value="">Select role</option>
@@ -42,5 +42,5 @@
                 <option value="{{$sup->id}}" @if($user->immediate_supervisor == $sup->id) selected @endif>{{$sup->name}}</option>
             @endforeach
         </select>
-    </div>
+    </div> --}}
 @endcomponent

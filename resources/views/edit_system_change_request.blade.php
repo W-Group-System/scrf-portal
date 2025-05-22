@@ -1,4 +1,10 @@
-@component('components.modal', ['modal_title' => 'Edit change request', 'modal_id' => 'edit'.$project_task->id, 'url' => url('update-system-change-request/'.$project_task->id), 'submit_btn_name' => 'Update'])
+@component('components.modal', [
+    'modal_title' => 'Edit change request', 
+    'modal_id' => 'edit'.$project_task->id, 
+    'url' => url('update-system-change-request/'.$project_task->id), 
+    'submit_btn_name' => 'Update',
+    'has_enctype' => true
+    ])
     {{-- <div class="form-group mb-1">
         Project
         <select data-placeholder="Select project" name="project" class="form-control chosen-select">
@@ -48,6 +54,6 @@
     </div>
     <div class="form-group mb-1">
         Attach File
-        <input type="file" name="scrf_attachments" class="form-control form-control-sm" required multiple>
+        <input type="file" name="scrf_attachments[]" class="form-control form-control-sm" multiple>
     </div
 @endcomponent

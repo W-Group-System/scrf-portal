@@ -28,7 +28,7 @@
         </div>
     </div> --}}
 
-    @if(auth()->user()->role == 'IT Department Head')
+    @if(auth()->user()->role == 'IT Department Head' || auth()->user()->role == 'IT Personnel')
         <div class="row">
             <div class="col-lg-6">
                 <button class="btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#new">

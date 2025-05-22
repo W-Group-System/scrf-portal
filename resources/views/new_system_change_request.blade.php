@@ -16,7 +16,7 @@
     </div> --}}
     <input type="hidden" name="project_id" value="{{$project->id}}">
     <div class="form-group mb-1">
-        Project name
+        Title
         <input type="text" name="project_name" class="form-control form-control-sm" required>
     </div>
     <div class="form-group mb-1">
@@ -30,7 +30,7 @@
     </div>
     <div class="form-group mb-1">
         Date Needed
-        <input type="date" name="date_needed" class="form-control form-control-sm" min="{{date('Y-m-d', strtotime("+1 day"))}}" required>
+        <input type="date" name="date_needed" class="form-control form-control-sm" min="{{date('Y-m-d', strtotime("+3 weekdays"))}}" required>
     </div>
     <div class="form-group mb-1">
         Priority
@@ -55,6 +55,6 @@
     </div>
     <div class="form-group mb-1">
         Attach File
-        <input type="file" name="scrf_attachments[]" class="form-control form-control-sm" required multiple>
+        <input type="file" name="scrf_attachments[]" class="form-control form-control-sm"  multiple>
     </div
 @endcomponent

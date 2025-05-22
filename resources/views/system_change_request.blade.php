@@ -68,13 +68,14 @@
                                     <th>Requestor</th>
                                     {{-- <th>Immediate Head Requestor</th> --}}
                                     <th>Status</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($project_tasks as $key=>$project_task)
                                     <tr>
                                         <td>
-                                            @if($project_task->status == 'Pending' && auth()->user()->id == $project_task->reporter)
+                                            @if($project_task->status == 'Returned' && auth()->user()->id == $project_task->reporter)
                                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit{{$project_task->id}}">
                                                 <i class="fa fa-pen-to-square text-white"></i>
                                             </button>
@@ -88,20 +89,13 @@
                                             </form>
                                             @endif
 
-                                            @if($project_task->status != 'Cancelled')
-                                            <a href="{{url('print-system-change-request/'.$project_task->id)}}" class="btn btn-sm btn-info" target="_blank">
-                                                <i class="fa fa-print text-white"></i>
-                                            </a>
-                                            @endif
-
                                             @if($project_task->status == 'Approved')
                                             <a href="{{url('show-project-task/'.$project_task->id)}}" class="btn btn-sm btn-success" target="_blank">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             @endif
                                         </td>
-                                        <td>{{$project_task->project->project_code}}-{{str_pad($key+1, '2', 0, STR_PAD_LEFT)}}</td>
-                                        {{-- <td>{{$project_task->project->project_name}}</td> --}}
+                                        <td>SYSDEV-{{str_pad($key+1, '2', 0, STR_PAD_LEFT)}}</td>
                                         <td>{{$project_task->type_of_request}}</td>
                                         <td>{{$project_task->priority}}</td>
                                         <td>{{date('M d Y', strtotime($project_task->date_needed))}}</td>
@@ -109,17 +103,19 @@
                                         <td>{!! nl2br(e($project_task->reason_for_changes)) !!}</td>
                                         <td>{!! nl2br(e($project_task->goal)) !!}</td>
                                         <td>{{$project_task->user->name}}</td>
-                                        {{-- <td>{{$project_task->project->department->head->name}}</td> --}}
                                         <td>
                                             @if($project_task->status == 'Pending')
                                                 <span class="badge bg-warning">
                                             @elseif($project_task->status == 'Approved')
                                                 <span class="badge bg-success">
-                                            @elseif($project_task->status == 'Rejected' || $project_task->status == 'Cancelled')
+                                            @elseif($project_task->status == 'Rejected' || $project_task->status == 'Cancelled' || $project_task->status == 'Returned')
                                                 <span class="badge bg-danger">
                                             @endif
                                                 {{$project_task->status}}
                                             </span>
+                                        </td>
+                                        <td>
+                                            {{ $project_task->progress }}
                                         </td>
                                     </tr>
 
